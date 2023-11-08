@@ -35,17 +35,41 @@
       const sendButton = document.getElementById("sendForm");
       sendButton.style.display = "none";
 
+
       function loadPage(pageIndex) {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-            document.getElementById("pageContent").innerHTML = this.responseText;
-            fillAnswers(pageIndex);
-            }
-        };
-        xhttp.open("GET", pages[pageIndex], true);
-        xhttp.send();
-        }
+        return new Promise((resolve, reject) => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById("pageContent").innerHTML = this.responseText;
+                    fillAnswers(pageIndex);
+                    resolve();
+                }
+            };
+            xhttp.open("GET", pages[pageIndex], true);
+            xhttp.send();
+        });
+      }
+
+      async function renderPage(pageIndex) {
+          try {
+              await loadPage(pageIndex);
+              
+              const test = document.getElementsByTagName("input");
+              console.log(test);
+              console.log(test[0]);
+
+              const value = document.getElementById("slider-value");
+              const input = document.getElementById("qrange1");
+              value.textContent = input.value;
+              input.addEventListener("input", (event) => {
+                  value.textContent = event.target.value;
+              });
+          } catch (error) {
+              // Handle any errors that might occur during the process
+              console.error(error);
+          }
+      }
 
       function previousPage() {
         if (currentPage > 0) {
@@ -74,6 +98,11 @@
 
       function saveAnswers(pageIndex) {
         const ranges = document.querySelectorAll('input[type="range"]');
+        // Object.keys(ranges).forEach((element) => {
+        //   console.log("Ranges: " + element)
+        // });
+        console.log(ranges[0].value)
+        
         const pageAnswers = {};
 
         ranges.forEach((range) => {
@@ -132,14 +161,13 @@
           xhttp.send("data=" + data);
       }
 
-
-
       function resetAnswers() {
         localStorage.clear();
         location.reload();
       }
 
-      loadPage(currentPage);
+      
+      renderPage(currentPage);
       document.getElementById("prevPage").disabled = true;
     </script>
   </body>
