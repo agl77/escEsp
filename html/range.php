@@ -57,26 +57,35 @@
               
               const values = document.getElementsByTagName("span");
               const inputs = document.getElementsByTagName("input");
-              console.log(values.length);
-              console.log(inputs.length);
               for (let i = 0; i < values.length; i++) {
                 inputs[i].addEventListener("input", (event) => {
                     values[i].textContent = event.target.value;
                 });
-                
-                values[i].textContent = inputs[i].value;
               }
-          } catch (error) {
-              // Handle any errors that might occur during the process
+            } catch (error) {
               console.error(error);
-          }
+            }
+            
+            if (localStorage.getItem("answers")) {
+              const allAnswers = JSON.parse(localStorage.getItem("answers"));
+              const answers = allAnswers[currentPage];
+
+              for (const key in answers) {
+                const slider = document.getElementById(key);
+                const span = slider.nextElementSibling;
+                slider.value = answers[key];
+                span.textContent = slider.value;
+              }
+            } else {
+              console.log("There is nothing saved on local storage");
+            }
       }
 
       function previousPage() {
         if (currentPage > 0) {
           saveAnswers(currentPage);
           currentPage--;
-          loadPage(currentPage);
+          renderPage(currentPage);
           document.getElementById("nextPage").disabled = false;
           if (currentPage === 0) {
             document.getElementById("prevPage").disabled = true;
@@ -88,7 +97,7 @@
         if (currentPage < pages.length - 1) {
           saveAnswers(currentPage);
           currentPage++;
-          loadPage(currentPage);
+          renderPage(currentPage);
           document.getElementById("prevPage").disabled = false;
           if (currentPage === pages.length - 1) {
             document.getElementById("nextPage").disabled = true;
@@ -99,17 +108,13 @@
 
       function saveAnswers(pageIndex) {
         const ranges = document.querySelectorAll('input[type="range"]');
-        // Object.keys(ranges).forEach((element) => {
-        //   console.log("Ranges: " + element)
-        // });
-        console.log(ranges[0].value)
         
         const pageAnswers = {};
 
         ranges.forEach((range) => {
-            const questionId = range.name;
-            const answerValue = range.value;
-            pageAnswers[questionId] = answerValue;
+            const question = range.name;
+            const value = range.value;
+            pageAnswers[question] = value;
         });
 
         answers[pageIndex] = pageAnswers;
@@ -132,7 +137,7 @@
             });
             }
         }
-        }
+      }
 
       // ...
       function getAnswers() {
