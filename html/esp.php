@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Ordenar Especialidades</title>
-    <meta charset="UTF-8" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
 
@@ -233,7 +232,8 @@
         }
 
         document.getElementById("enviarEspecialidades").onclick = function () {
-            location.href = "valores.php";
+            saveAnswers();
+            location.href = "valores.html";
         };
 
 
@@ -246,6 +246,29 @@
                 checkEspecialidades();0
             });
         });
+
+        function saveAnswers() {
+            const likedEspecialidades = getListFrom('liked');
+            const dislikedEspecialidades = getListFrom('disliked');
+
+            const answers = {
+                liked: [],
+                disliked: []
+            };
+
+            // Preencha as respostas para as especialidades "Mais se Identifica"
+            likedEspecialidades.forEach(especialidade => {
+                answers.liked.push(especialidade.textContent.trim());
+            });
+
+            // Preencha as respostas para as especialidades "Menos se Identifica"
+            dislikedEspecialidades.forEach(especialidade => {
+                answers.disliked.push(especialidade.textContent.trim());
+            });
+
+            // Salve as respostas no localStorage
+            localStorage.setItem('especialidades', JSON.stringify(answers));
+            }
 
 
     </script>
