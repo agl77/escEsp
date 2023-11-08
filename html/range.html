@@ -132,23 +132,24 @@
 
         answers[pageIndex] = pageAnswers;
         localStorage.setItem("answers", JSON.stringify(answers));
-        }
+      }
+
       function fillAnswers() {
         for (const key in answers) {
-            const pageAnswers = answers[key];
-            if (pageAnswers) {
+          const pageAnswers = answers[key];
+          if (pageAnswers) {
             Object.keys(pageAnswers).forEach((questionId) => {
-                const answerValue = pageAnswers[questionId];
-                const range = document.querySelector(`input[name="${questionId}"][value="${answerValue}"]`);
-                if (range) {
+              const answerValue = pageAnswers[questionId];
+              const range = document.querySelector(`input[name="${questionId}"][value="${answerValue}"]`);
+              if (range) {
                 range.value = answerValue;
                 const valueSpan = document.getElementById(`value${questionId}`);
                 if (valueSpan) {
-                    valueSpan.textContent = answerValue;
+                  valueSpan.textContent = answerValue;
                 }
-                }
+              }
             });
-            }
+          }
         }
       }
 
