@@ -35,23 +35,57 @@
       const sendButton = document.getElementById("sendForm");
       sendButton.style.display = "none";
 
+
       function loadPage(pageIndex) {
-        const xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (this.readyState === 4 && this.status === 200) {
-            document.getElementById("pageContent").innerHTML = this.responseText;
-            fillAnswers(pageIndex);
+        return new Promise((resolve, reject) => {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById("pageContent").innerHTML = this.responseText;
+                    fillAnswers(pageIndex);
+                    resolve();
+                }
+            };
+            xhttp.open("GET", pages[pageIndex], true);
+            xhttp.send();
+        });
+      }
+
+      async function renderPage(pageIndex) {
+          try {
+              await loadPage(pageIndex);
+              
+              const values = document.getElementsByTagName("span");
+              const inputs = document.getElementsByTagName("input");
+              for (let i = 0; i < values.length; i++) {
+                inputs[i].addEventListener("input", (event) => {
+                    values[i].textContent = event.target.value;
+                });
+              }
+            } catch (error) {
+              console.error(error);
             }
-        };
-        xhttp.open("GET", pages[pageIndex], true);
-        xhttp.send();
-        }
+            
+            if (localStorage.getItem("answers")) {
+              const allAnswers = JSON.parse(localStorage.getItem("answers"));
+              const answers = allAnswers[currentPage];
+
+              for (const key in answers) {
+                const slider = document.getElementById(key);
+                const span = slider.nextElementSibling;
+                slider.value = answers[key];
+                span.textContent = slider.value;
+              }
+            } else {
+              console.log("There is nothing saved on local storage");
+            }
+      }
 
       function previousPage() {
         if (currentPage > 0) {
           saveAnswers(currentPage);
           currentPage--;
-          loadPage(currentPage);
+          renderPage(currentPage);
           document.getElementById("nextPage").disabled = false;
           if (currentPage === 0) {
             document.getElementById("prevPage").disabled = true;
@@ -63,7 +97,7 @@
         if (currentPage < pages.length - 1) {
           saveAnswers(currentPage);
           currentPage++;
-          loadPage(currentPage);
+          renderPage(currentPage);
           document.getElementById("prevPage").disabled = false;
           if (currentPage === pages.length - 1) {
             document.getElementById("nextPage").disabled = true;
@@ -74,12 +108,13 @@
 
       function saveAnswers(pageIndex) {
         const ranges = document.querySelectorAll('input[type="range"]');
+        
         const pageAnswers = {};
 
         ranges.forEach((range) => {
-            const questionId = range.name;
-            const answerValue = range.value;
-            pageAnswers[questionId] = answerValue;
+            const question = range.name;
+            const value = range.value;
+            pageAnswers[question] = value;
         });
 
         answers[pageIndex] = pageAnswers;
@@ -102,7 +137,7 @@
             });
             }
         }
-        }
+      }
 
       // ...
       function getAnswers() {
@@ -132,14 +167,13 @@
           xhttp.send("data=" + data);
       }
 
-
-
       function resetAnswers() {
         localStorage.clear();
         location.reload();
       }
 
-      loadPage(currentPage);
+      
+      renderPage(currentPage);
       document.getElementById("prevPage").disabled = true;
     </script>
   </body>
