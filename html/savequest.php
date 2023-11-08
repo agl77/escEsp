@@ -1,7 +1,7 @@
 <?php
 // Receber os dados enviados do JavaScript
 $data = json_decode($_POST['data'], true);
-header("Location: range.php");
+header("Location: range.html");
 
 
         // try {

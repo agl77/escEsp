@@ -25,7 +25,7 @@
     <!-- <button onclick="resetAnswers()">Resets</button> -->
 
     <script>
-      const pages = ["range1.html", "range2.html", "pagina3.html", "pagina4.html", "pagina5.html", "pagina6.html"];
+      const pages = ["pagina1.html", "pagina2.html", "pagina3.html", "pagina4.html", "pagina5.html", "pagina6.html"];
       let currentPage = 0;
       let answers = JSON.parse(localStorage.getItem("answers")) || {};
       let allAnswers = {};
