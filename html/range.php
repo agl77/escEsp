@@ -55,16 +55,17 @@
           try {
               await loadPage(pageIndex);
               
-              const test = document.getElementsByTagName("input");
-              console.log(test);
-              console.log(test[0]);
-
-              const value = document.getElementById("slider-value");
-              const input = document.getElementById("qrange1");
-              value.textContent = input.value;
-              input.addEventListener("input", (event) => {
-                  value.textContent = event.target.value;
-              });
+              const values = document.getElementsByTagName("span");
+              const inputs = document.getElementsByTagName("input");
+              console.log(values.length);
+              console.log(inputs.length);
+              for (let i = 0; i < values.length; i++) {
+                inputs[i].addEventListener("input", (event) => {
+                    values[i].textContent = event.target.value;
+                });
+                
+                values[i].textContent = inputs[i].value;
+              }
           } catch (error) {
               // Handle any errors that might occur during the process
               console.error(error);
