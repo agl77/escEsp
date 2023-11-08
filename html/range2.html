@@ -1,107 +1,194 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Questionário Vocacional de Especialidade Médica</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <script src="range-script.js"></script>
-</head>
-<body>
-<div class="container">
-    <div class="row justify-content-center">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
         <div class="col-md-8">
-            <p><br><b>Questionário de deslizar 1/6 </b></p>
-            <h4>Categoria: Como você pensa</h4>
-            <form id="pg1Form" action="slice_script.php" method="post">
+          <p><br /><b>Questionário de deslizar 1/6 </b></p>
+          <h4>Categoria: Como você pensa</h4>
+          <form id="pg1Form" action="slice_script.php" method="post">
+            <div class="question">
+              <p>13. Fica entediado com atividades repetitivas</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                name="qrange13"
+                id="qrange13"
+              />
+              <span id="value13"></span>
+            </div>
 
-                <div class="question">
-                    <p>13. Fica entediado com atividades repetitivas</p>
-                    <input type="range" min="0" max="10" value="0" name="qrange13" id="qrange13">
-                    <span id="value13">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>14. Gosta de pesquisa</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange14" name="qrange14">
-                    <span id="value14">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>15. Gosta de um cronograma bem planejado</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange15" name="qrange15">
-                    <span id="value15">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>16. Fica confortável fazendo a mesma atividade repetitivamente</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange16" name="qrange16">
-                    <span id="value16">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>17. Aceita variações no cronograma</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange17" name="qrange17">
-                    <span id="value17">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>18. Aceita resultados de longo prazo</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange18" name="qrange18">
-                    <span id="value18">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>19. É mais pensador do que da ação</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange19" name="qrange19">
-                    <span id="value19">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>20. É minucioso e preciso</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange20" name="qrange20">
-                    <span id="value20">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>21. É perseverante</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange21" name="qrange21">
-                    <span id="value21">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>22. É mais de fazer do que de falar</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange22" name="qrange22">
-                    <span id="value22">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>23. Lida com os problemas com uma ação prática e direta</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange23" name="qrange23">
-                    <span id="value23">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>24. Se adapta facilmente a mudanças</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange24" name="qrange24">
-                    <span id="value24">0</span>
-                </div>
-        
-                <div class="question">
-                    <p>25. É autodidata</p>
-                    <input type="range" min="0" max="10" value="0" id="qrange25" name="qrange25">
-                    <span id="value25">0</span>
-                </div>
-     
- 
+            <div class="question">
+              <p>14. Gosta de pesquisa</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange14"
+                name="qrange14"
+              />
+              <span id="value14"></span>
+            </div>
 
-    </form>
+            <div class="question">
+              <p>15. Gosta de um cronograma bem planejado</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange15"
+                name="qrange15"
+              />
+              <span id="value15"></span>
+            </div>
+
+            <div class="question">
+              <p>
+                16. Fica confortável fazendo a mesma atividade repetitivamente
+              </p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange16"
+                name="qrange16"
+              />
+              <span id="value16"></span>
+            </div>
+
+            <div class="question">
+              <p>17. Aceita variações no cronograma</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange17"
+                name="qrange17"
+              />
+              <span id="value17"></span>
+            </div>
+
+            <div class="question">
+              <p>18. Aceita resultados de longo prazo</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange18"
+                name="qrange18"
+              />
+              <span id="value18"></span>
+            </div>
+
+            <div class="question">
+              <p>19. É mais pensador do que da ação</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange19"
+                name="qrange19"
+              />
+              <span id="value19"></span>
+            </div>
+
+            <div class="question">
+              <p>20. É minucioso e preciso</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange20"
+                name="qrange20"
+              />
+              <span id="value20"></span>
+            </div>
+
+            <div class="question">
+              <p>21. É perseverante</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange21"
+                name="qrange21"
+              />
+              <span id="value21"></span>
+            </div>
+
+            <div class="question">
+              <p>22. É mais de fazer do que de falar</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange22"
+                name="qrange22"
+              />
+              <span id="value22"></span>
+            </div>
+
+            <div class="question">
+              <p>23. Lida com os problemas com uma ação prática e direta</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange23"
+                name="qrange23"
+              />
+              <span id="value23"></span>
+            </div>
+
+            <div class="question">
+              <p>24. Se adapta facilmente a mudanças</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange24"
+                name="qrange24"
+              />
+              <span id="value24"></span>
+            </div>
+
+            <div class="question">
+              <p>25. É autodidata</p>
+              <input
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="qrange25"
+                name="qrange25"
+              />
+              <span id="value25"></span>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-    </div>
-    </div>
-    
-</body>
+  </body>
 </html>
-
-            
-
-                
