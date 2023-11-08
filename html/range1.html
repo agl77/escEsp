@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Questionário Vocacional de Especialidade Médica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <p><br><b>Questionário de deslizar 1/6 </b></p>
+            <h4>Categoria: Como você pensa</h4>
+            <form id="pg1Form" action="slice_script.php" method="post">
+
+            <div class="question">
+                <p>1. Pergunta o porque</p>
+                <input type="range" min="0" max="10" value="0" name="qrange1" id="qrange1">
+                <span id="value1">0</span>
+            </div>
+            <div class="question">
+                <p>2. Fica atento aos detalhes</p>
+                <input type="range" min="0" max="10" value="0" name="qrange2" id="qrange2">
+                <span id="value2">0</span>
+            </div>
+            
+            <div class="question">
+                <p>3. Gosta de resolver problemas complexos</p>
+                <input type="range" min="0" max="10" value="0" name="qrange3" id="qrange3">
+                <span id="value3">0</span>
+            </div>
+            
+            <div class="question">
+                <p>4. Sustenta a atenção por um longo período</p>
+                <input type="range" min="0" max="10" value="0" name="qrange4" id="qrange4">
+                <span id="value4">0</span>
+            </div>
+            
+            <div class="question">
+                <p>5. Confia mais na experiência do que na teoria</p>
+                <input type="range" min="0" max="10" value="0" name="qrange5" id="qrange5">
+                <span id="value5">0</span>
+            </div>
+            
+            <div class="question">
+                <p>6. Fica confortável/contente em saber um pouco de muita coisa</p>
+                <input type="range" min="0" max="10" value="0" name="qrange6" id="qrange6">
+                <span id="value6">0</span>
+            </div>
+            
+            <div class="question">
+                <p>7. Fica desconfortável com problemas não completamente resolvidos</p>
+                <input type="range" min="0" max="10" value="0" name="qrange7" id="qrange7">
+                <span id="value7">0</span>
+            </div>
+            
+            <div class="question">
+                <p>8. Pensa logicamente</p>
+                <input type="range" min="0" max="10" value="0" name="qrange8" id="qrange8">
+                <span id="value8">0</span>
+            </div>
+            
+            <div class="question">
+                <p>9. É objetivo</p>
+                <input type="range" min="0" max="10" value="0" name="qrange9" id="qrange9">
+                <span id="value9">0</span>
+            </div>
+            
+            <div class="question">
+                <p>10. É inclinado à matemática</p>
+                <input type="range" min="0" max="10" value="0" name="qrange10" id="qrange10">
+                <span id="value10">0</span>
+            </div>
+            
+            <div class="question">
+                <p>11. É orientado visualmente</p>
+                <input type="range" min="0" max="10" value="0" name="qrange11" id="qrange11">
+                <span id="value11">0</span>
+            </div>
+            
+            <div class="question">
+                <p>12. Procura por possibilidades</p>
+                <input type="range" min="0" max="10" value="0" name="qrange12" id="qrange12">
+                <span id="value12">0</span>
+            </div>
+            <script>
+
+                // Atualize o valor exibido ao lado da barra de deslizamento quando o usuário interagir com ela
+                        const sliders = document.querySelectorAll('input[type="range"]');
+                        sliders.forEach((slider, index) => {
+                            const valueSpan = document.getElementById(`value${index + 1}`);
+                            slider.addEventListener('input', () => {
+                                valueSpan.textContent = slider.value;
+                            });
+                        });
+                
+                    </script>
+  
+
+    </form>
+    </div>
+    </div>
+    </div>
+    
+</body>
+</html>
