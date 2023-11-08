@@ -51,34 +51,47 @@
         });
       }
 
-      async function renderPage(pageIndex) {
-          try {
-              await loadPage(pageIndex);
-              
-              const values = document.getElementsByTagName("span");
-              const inputs = document.getElementsByTagName("input");
-              for (let i = 0; i < values.length; i++) {
-                inputs[i].addEventListener("input", (event) => {
-                    values[i].textContent = event.target.value;
-                });
-              }
-            } catch (error) {
-              console.error(error);
-            }
-            
-            if (localStorage.getItem("answers")) {
-              const allAnswers = JSON.parse(localStorage.getItem("answers"));
-              const answers = allAnswers[currentPage];
+      function setSpansTo(value) {
+        const spans = document.getElementsByTagName("span");
+          for (let i = 0; i < spans.length; i++) {
+            spans[i].textContent = value;
+          }
+      }
 
-              for (const key in answers) {
-                const slider = document.getElementById(key);
-                const span = slider.nextElementSibling;
-                slider.value = answers[key];
-                span.textContent = slider.value;
-              }
-            } else {
-              console.log("There is nothing saved on local storage");
-            }
+      async function renderPage(pageIndex) {
+        try {
+          await loadPage(pageIndex);
+          
+          const values = document.getElementsByTagName("span");
+          const inputs = document.getElementsByTagName("input");
+          for (let i = 0; i < values.length; i++) {
+            inputs[i].addEventListener("input", (event) => {
+              values[i].textContent = event.target.value;
+            });
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        
+        if (localStorage.getItem("answers") === null){
+          setSpansTo(5);
+          return;
+        }
+        
+        const allAnswers = JSON.parse(localStorage.getItem("answers"));
+        const answers = allAnswers[currentPage];
+
+        if (answers == null) {
+          setSpansTo(5);
+          return;
+        }
+
+        for (const key in answers) {
+            const slider = document.getElementById(key);
+            const span = slider.nextElementSibling;
+            slider.value = answers[key];
+            span.textContent = slider.value;
+        }
       }
 
       function previousPage() {
