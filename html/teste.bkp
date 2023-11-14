@@ -1,0 +1,326 @@
+-- MariaDB dump 10.19  Distrib 10.11.4-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: teste
+-- ------------------------------------------------------
+-- Server version	10.11.4-MariaDB-1~deb12u1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `cadastro`
+--
+
+DROP TABLE IF EXISTS `cadastro`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cadastro` (
+  `idcadastro` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) DEFAULT NULL,
+  `nascimento` date DEFAULT NULL,
+  `formado` int(11) DEFAULT NULL,
+  `instituicao` varchar(60) DEFAULT NULL,
+  `periodo` int(11) DEFAULT NULL,
+  `especialidade` varchar(45) DEFAULT NULL,
+  `CPF` varchar(15) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `telefone` varchar(17) DEFAULT NULL,
+  PRIMARY KEY (`idcadastro`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cadastro`
+--
+
+LOCK TABLES `cadastro` WRITE;
+/*!40000 ALTER TABLE `cadastro` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cadastro` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `esp_valor`
+--
+
+DROP TABLE IF EXISTS `esp_valor`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `esp_valor` (
+  `idespvalor` int(11) DEFAULT NULL,
+  `idcadastro` int(11) DEFAULT NULL,
+  `like` varchar(300) DEFAULT NULL,
+  `dislike` varchar(300) DEFAULT NULL,
+  `valores` varchar(300) DEFAULT NULL,
+  KEY `esp_valor_FK` (`idcadastro`),
+  CONSTRAINT `esp_valor_FK` FOREIGN KEY (`idcadastro`) REFERENCES `cadastro` (`idcadastro`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `esp_valor`
+--
+
+LOCK TABLES `esp_valor` WRITE;
+/*!40000 ALTER TABLE `esp_valor` DISABLE KEYS */;
+/*!40000 ALTER TABLE `esp_valor` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `question`
+--
+
+DROP TABLE IF EXISTS `question`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `question` (
+  `idquestion` int(11) NOT NULL AUTO_INCREMENT,
+  `idcadastro` int(11) DEFAULT NULL,
+  `q1` varchar(2) DEFAULT NULL,
+  `q2` varchar(2) DEFAULT NULL,
+  `q3` varchar(2) DEFAULT NULL,
+  `q4` varchar(2) DEFAULT NULL,
+  `q5` varchar(2) DEFAULT NULL,
+  `q6` varchar(2) DEFAULT NULL,
+  `q7` varchar(2) DEFAULT NULL,
+  `q8` varchar(2) DEFAULT NULL,
+  `q9` varchar(2) DEFAULT NULL,
+  `q10` varchar(2) DEFAULT NULL,
+  `q11` varchar(2) DEFAULT NULL,
+  `q12` varchar(2) DEFAULT NULL,
+  `q13` varchar(2) DEFAULT NULL,
+  `q14` varchar(2) DEFAULT NULL,
+  `q15` varchar(2) DEFAULT NULL,
+  `q16` varchar(2) DEFAULT NULL,
+  `q17` varchar(2) DEFAULT NULL,
+  `q18` varchar(2) DEFAULT NULL,
+  `q19` varchar(2) DEFAULT NULL,
+  `q20` varchar(2) DEFAULT NULL,
+  `q21` varchar(2) DEFAULT NULL,
+  `q22` varchar(2) DEFAULT NULL,
+  `q23` varchar(2) DEFAULT NULL,
+  `q24` varchar(2) DEFAULT NULL,
+  `q25` varchar(2) DEFAULT NULL,
+  `q26` varchar(2) DEFAULT NULL,
+  `q27` varchar(2) DEFAULT NULL,
+  `q28` varchar(2) DEFAULT NULL,
+  `q29` varchar(2) DEFAULT NULL,
+  `q30` varchar(2) DEFAULT NULL,
+  `q31` varchar(2) DEFAULT NULL,
+  `q32` varchar(2) DEFAULT NULL,
+  `q33` varchar(2) DEFAULT NULL,
+  `q34` varchar(2) DEFAULT NULL,
+  `q35` varchar(2) DEFAULT NULL,
+  `q36` varchar(2) DEFAULT NULL,
+  `q37` varchar(2) DEFAULT NULL,
+  `q38` varchar(2) DEFAULT NULL,
+  `q39` varchar(2) DEFAULT NULL,
+  `q40` varchar(2) DEFAULT NULL,
+  `q41` varchar(2) DEFAULT NULL,
+  `q42` varchar(2) DEFAULT NULL,
+  `q43` varchar(2) DEFAULT NULL,
+  `q44` varchar(2) DEFAULT NULL,
+  `q45` varchar(2) DEFAULT NULL,
+  `q46` varchar(2) DEFAULT NULL,
+  `q47` varchar(2) DEFAULT NULL,
+  `q48` varchar(2) DEFAULT NULL,
+  `q49` varchar(2) DEFAULT NULL,
+  `q50` varchar(2) DEFAULT NULL,
+  `q51` varchar(2) DEFAULT NULL,
+  `q52` varchar(2) DEFAULT NULL,
+  `q53` varchar(2) DEFAULT NULL,
+  `q54` varchar(2) DEFAULT NULL,
+  `q55` varchar(2) DEFAULT NULL,
+  `q56` varchar(2) DEFAULT NULL,
+  `q57` varchar(2) DEFAULT NULL,
+  `q58` varchar(2) DEFAULT NULL,
+  `q59` varchar(2) DEFAULT NULL,
+  `q60` varchar(2) DEFAULT NULL,
+  `q61` varchar(2) DEFAULT NULL,
+  `q62` varchar(2) DEFAULT NULL,
+  `q63` varchar(2) DEFAULT NULL,
+  `q64` varchar(2) DEFAULT NULL,
+  `q65` varchar(2) DEFAULT NULL,
+  `q66` varchar(2) DEFAULT NULL,
+  `q67` varchar(2) DEFAULT NULL,
+  `q68` varchar(2) DEFAULT NULL,
+  `q69` varchar(2) DEFAULT NULL,
+  `q70` varchar(2) DEFAULT NULL,
+  `q71` varchar(2) DEFAULT NULL,
+  `q72` varchar(2) DEFAULT NULL,
+  `q73` varchar(2) DEFAULT NULL,
+  `q74` varchar(2) DEFAULT NULL,
+  `q75` varchar(2) DEFAULT NULL,
+  `q76` varchar(2) DEFAULT NULL,
+  `q77` varchar(2) DEFAULT NULL,
+  `q78` varchar(2) DEFAULT NULL,
+  `q79` varchar(2) DEFAULT NULL,
+  `q80` varchar(2) DEFAULT NULL,
+  `q81` varchar(2) DEFAULT NULL,
+  `q82` varchar(2) DEFAULT NULL,
+  `q83` varchar(2) DEFAULT NULL,
+  `q84` varchar(2) DEFAULT NULL,
+  `q85` varchar(2) DEFAULT NULL,
+  `q86` varchar(2) DEFAULT NULL,
+  `q87` varchar(2) DEFAULT NULL,
+  `q88` varchar(2) DEFAULT NULL,
+  `q89` varchar(2) DEFAULT NULL,
+  `q90` varchar(2) DEFAULT NULL,
+  `q91` varchar(2) DEFAULT NULL,
+  `q92` varchar(2) DEFAULT NULL,
+  `q93` varchar(2) DEFAULT NULL,
+  `q94` varchar(2) DEFAULT NULL,
+  `q95` varchar(2) DEFAULT NULL,
+  `q96` varchar(2) DEFAULT NULL,
+  `q97` varchar(2) DEFAULT NULL,
+  `q98` varchar(2) DEFAULT NULL,
+  `q99` varchar(2) DEFAULT NULL,
+  `q100` varchar(2) DEFAULT NULL,
+  `q101` varchar(2) DEFAULT NULL,
+  `q102` varchar(2) DEFAULT NULL,
+  `q103` varchar(2) DEFAULT NULL,
+  `q104` varchar(2) DEFAULT NULL,
+  `q105` varchar(2) DEFAULT NULL,
+  `q106` varchar(2) DEFAULT NULL,
+  `q107` varchar(2) DEFAULT NULL,
+  `q108` varchar(2) DEFAULT NULL,
+  `q109` varchar(2) DEFAULT NULL,
+  `q110` varchar(2) DEFAULT NULL,
+  `q111` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`idquestion`),
+  KEY `question_FK` (`idcadastro`),
+  CONSTRAINT `question_FK` FOREIGN KEY (`idcadastro`) REFERENCES `cadastro` (`idcadastro`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `question`
+--
+
+LOCK TABLES `question` WRITE;
+/*!40000 ALTER TABLE `question` DISABLE KEYS */;
+/*!40000 ALTER TABLE `question` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `slide`
+--
+
+DROP TABLE IF EXISTS `slide`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `slide` (
+  `idslide` int(11) NOT NULL,
+  `idcadastro` int(11) DEFAULT NULL,
+  `v1` varchar(2) DEFAULT NULL,
+  `v2` varchar(2) DEFAULT NULL,
+  `v3` varchar(2) DEFAULT NULL,
+  `v4` varchar(2) DEFAULT NULL,
+  `v5` varchar(2) DEFAULT NULL,
+  `v6` varchar(2) DEFAULT NULL,
+  `v7` varchar(2) DEFAULT NULL,
+  `v8` varchar(2) DEFAULT NULL,
+  `v9` varchar(2) DEFAULT NULL,
+  `v10` varchar(2) DEFAULT NULL,
+  `v11` varchar(2) DEFAULT NULL,
+  `v12` varchar(2) DEFAULT NULL,
+  `v13` varchar(2) DEFAULT NULL,
+  `v14` varchar(2) DEFAULT NULL,
+  `v15` varchar(2) DEFAULT NULL,
+  `v16` varchar(2) DEFAULT NULL,
+  `v17` varchar(2) DEFAULT NULL,
+  `v18` varchar(2) DEFAULT NULL,
+  `v19` varchar(2) DEFAULT NULL,
+  `v20` varchar(2) DEFAULT NULL,
+  `v21` varchar(2) DEFAULT NULL,
+  `v22` varchar(2) DEFAULT NULL,
+  `v23` varchar(2) DEFAULT NULL,
+  `v24` varchar(2) DEFAULT NULL,
+  `v25` varchar(2) DEFAULT NULL,
+  `v26` varchar(2) DEFAULT NULL,
+  `v27` varchar(2) DEFAULT NULL,
+  `v28` varchar(2) DEFAULT NULL,
+  `v29` varchar(2) DEFAULT NULL,
+  `v30` varchar(2) DEFAULT NULL,
+  `v31` varchar(2) DEFAULT NULL,
+  `v32` varchar(2) DEFAULT NULL,
+  `v33` varchar(2) DEFAULT NULL,
+  `v34` varchar(2) DEFAULT NULL,
+  `v35` varchar(2) DEFAULT NULL,
+  `v36` varchar(2) DEFAULT NULL,
+  `v37` varchar(2) DEFAULT NULL,
+  `v38` varchar(2) DEFAULT NULL,
+  `v39` varchar(2) DEFAULT NULL,
+  `v40` varchar(2) DEFAULT NULL,
+  `v41` varchar(2) DEFAULT NULL,
+  `v42` varchar(2) DEFAULT NULL,
+  `v43` varchar(2) DEFAULT NULL,
+  `v44` varchar(2) DEFAULT NULL,
+  `v45` varchar(2) DEFAULT NULL,
+  `v46` varchar(2) DEFAULT NULL,
+  `v47` varchar(2) DEFAULT NULL,
+  `v48` varchar(2) DEFAULT NULL,
+  `v49` varchar(2) DEFAULT NULL,
+  `v50` varchar(2) DEFAULT NULL,
+  `v51` varchar(2) DEFAULT NULL,
+  `v52` varchar(2) DEFAULT NULL,
+  `v53` varchar(2) DEFAULT NULL,
+  `v54` varchar(2) DEFAULT NULL,
+  `v55` varchar(2) DEFAULT NULL,
+  `v56` varchar(2) DEFAULT NULL,
+  `v57` varchar(2) DEFAULT NULL,
+  `v58` varchar(2) DEFAULT NULL,
+  `v59` varchar(2) DEFAULT NULL,
+  `v60` varchar(2) DEFAULT NULL,
+  `v61` varchar(2) DEFAULT NULL,
+  `v62` varchar(2) DEFAULT NULL,
+  `v63` varchar(2) DEFAULT NULL,
+  `v64` varchar(2) DEFAULT NULL,
+  `v65` varchar(2) DEFAULT NULL,
+  `v66` varchar(2) DEFAULT NULL,
+  `v67` varchar(2) DEFAULT NULL,
+  `v68` varchar(2) DEFAULT NULL,
+  `v69` varchar(2) DEFAULT NULL,
+  `v70` varchar(2) DEFAULT NULL,
+  `v71` varchar(2) DEFAULT NULL,
+  `v72` varchar(2) DEFAULT NULL,
+  `v73` varchar(2) DEFAULT NULL,
+  `v74` varchar(2) DEFAULT NULL,
+  `v75` varchar(2) DEFAULT NULL,
+  `v76` varchar(2) DEFAULT NULL,
+  `v77` varchar(2) DEFAULT NULL,
+  `v78` varchar(2) DEFAULT NULL,
+  `v79` varchar(2) DEFAULT NULL,
+  `v80` varchar(2) DEFAULT NULL,
+  `v81` varchar(2) DEFAULT NULL,
+  KEY `slide_FK` (`idcadastro`),
+  CONSTRAINT `slide_FK` FOREIGN KEY (`idcadastro`) REFERENCES `cadastro` (`idcadastro`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `slide`
+--
+
+LOCK TABLES `slide` WRITE;
+/*!40000 ALTER TABLE `slide` DISABLE KEYS */;
+/*!40000 ALTER TABLE `slide` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-11-13 14:38:43

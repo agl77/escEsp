@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2>Selecione os QUATRO principais valores de trabalho mais importantes para você:</h2>
-    <form action="paginado.php" method="post">
+    <form action="processa_valores.php" method="post">
         <label for="creativity">Criatividade</label>
         <input type="checkbox" name="values[]" id="creativity" value="Criatividade"><br>
 
@@ -52,6 +52,11 @@
         <br>
 
         <p>Selecione até quatro valores:</p>
+        
+        <input type="hidden" name="idcadastro" id="idcadastro" value="">
+        <input type="hidden" name="liked" id="liked" value="">
+        <input type="hidden" name="disliked" id="disliked" value="">
+
         <input type="submit" value="Enviar" name="subimit" disabled>
     </form>
     <script>
@@ -70,6 +75,25 @@
                 updateNextButton(); // Atualize o botão "Próximo"
             });
         });
+
+        nextButton.addEventListener('click', function (event) {
+            saveValues();
+            updateNextButton();
+
+            const idcadastro = localStorage.getItem('idcadastro');
+            document.getElementById('idcadastro').value = idcadastro;
+
+            // Obtenha os valores da chave 'especialidades' do localStorage
+            const especialidadesData = JSON.parse(localStorage.getItem('especialidades')) || { liked: [], disliked: [] };
+
+            // Divida as strings em arrays
+            const liked = especialidadesData.liked.map(item => item.trim()).filter(item => item !== '');
+            const disliked = especialidadesData.disliked.map(item => item.trim()).filter(item => item !== '');
+
+            document.getElementById('liked').value = JSON.stringify(liked);
+            document.getElementById('disliked').value = JSON.stringify(disliked);
+        });
+
 
         function saveValues() {
         const selectedValues = Array.from(checkboxes)
@@ -94,6 +118,7 @@
         updateNextButton();
         });
 
+        
 
     </script>
 </body>
