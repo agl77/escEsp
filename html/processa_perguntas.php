@@ -33,21 +33,17 @@ try {
     // Montando o array de valores a serem vinculados
     $bindValues = array_merge([$idcadastro], array_values($answers));
 
+    //echo "answers " . $answer;
+    //echo "<br> sql " . $sql;
+    //echo "<br> values " . $values;
+    //echo "<br> fullsql" . $fullSql;
+    //echo "<br> bind " . $bindValues;
+
     // Executando a consulta com os valores vinculados
     $stmt->execute($bindValues);
 
-    header("Location: paginado.php");
+    header("Location: range.html");
 } catch (PDOException $e) {
-    echo "Erro ao inserir os dados: " . $e->getMessage();
+  echo "Erro ao inserir os dados: " . $e->getMessage();
 }
-?>
-
-
-        
-<?php
-// Receber os dados enviados do JavaScript
-
-$data = json_decode($_POST['data'], true);
-header("Location: range.html");
-
 ?>
