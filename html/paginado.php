@@ -120,7 +120,7 @@
                   window.location.href = "savequest.php";
               }
           };
-          xhttp.open("POST", "savequest.php", true);
+          xhttp.open("POST", "processa_perguntas.php", true);
           xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
           // Converter as respostas em uma string JSON e enviá-las
