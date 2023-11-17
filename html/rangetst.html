@@ -25,16 +25,16 @@
 
     
     <!-- <button onclick="resetAnswers()">Resets</button> -->
-    <form id="questionForm" method="post" action="processa_range.php">
+    <form id="questionForm" method="post" action="savequest.php">
         <input type="hidden" id="idcadastro" name="idcadastro" value="" />
-        <input type="hidden" id="answrange" name="answrange" value="{}" />
+        <input type="hidden" id="answrange" name="answers" value="{}" />
         <!-- Adicione outros campos do formulário, se necessário -->
   
         <button type="button" id="sendForm" onclick="submitForm()">Enviar</button>
       </form>
 
     <script>
-      const pages = ["range1.html" , "range2.html", "range3.html", "range4.html", "range5.html", "range6.html", "range7.html"];
+      const pages = ["range1.html", "range2.html", "range3.html", "range4.html", "range5.html", "range6.html", "range7.html"];
       let currentPage = 0;
       let answers = JSON.parse(localStorage.getItem("answrange")) || {};
       let allAnswers = {};
@@ -161,52 +161,58 @@
       }
 
       // ...
-      // function getAnswers() {
-      //     saveAnswers(pages.length - 1);
-
-      //     // Combine todas as respostas em um único objeto
-      //     const allAnswers = {};
-      //     for (const key in answers) {
-      //         Object.assign(allAnswers, answers[key]);
-      //     }
-
-      //     // Enviar as respostas para o arquivo PHP usando uma solicitação POST
-      //     const xhttp = new XMLHttpRequest();
-      //     xhttp.onreadystatechange = function () {
-      //         if (this.readyState === 4 && this.status === 200) {
-      //             // Aqui você pode lidar com a resposta do servidor, se necessário.
-      //             console.log(this.responseText);
-      //             // Redirecionar após o envio bem-sucedido
-      //             window.location.href = "savequest.php";
-      //         }
-      //     };
-      //     xhttp.open("POST", "savequest.php", true);
-      //     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-      //     // Converter as respostas em uma string JSON e enviá-las
-      //     const data = JSON.stringify(allAnswers);
-      //     xhttp.send("data=" + data);
-      // }
-
-      function submitForm() {
+      function getAnswers() {
           saveAnswers(pages.length - 1);
 
           // Combine todas as respostas em um único objeto
-          const allAnswers = answers;
-          
-          // Atualizar os campos ocultos do formulário com os dados
-          const idcadastro = localStorage.getItem('idcadastro');
-          document.getElementById('idcadastro').value = idcadastro;
-          document.getElementById('answrange').value = JSON.stringify(allAnswers);
+          const allAnswers = {};
+          for (const key in answers) {
+              Object.assign(allAnswers, answers[key]);
+          }
 
-          // Submeter o formulário
-          document.getElementById("questionForm").submit();
+          // Enviar as respostas para o arquivo PHP usando uma solicitação POST
+          const xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function () {
+              if (this.readyState === 4 && this.status === 200) {
+                  // Aqui você pode lidar com a resposta do servidor, se necessário.
+                  console.log(this.responseText);
+                  // Redirecionar após o envio bem-sucedido
+                  window.location.href = "savequest.php";
+              }
+          };
+          xhttp.open("POST", "savequest.php", true);
+          xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+          // Converter as respostas em uma string JSON e enviá-las
+          const data = JSON.stringify(allAnswers);
+          xhttp.send("data=" + data);
+      }
+
+        function submitForm() {
+            saveAnswers(pages.length - 1);
+
+            // Combine todas as respostas em um único objeto
+            const allAnswers = {};
+            for (const key in answers) {
+              Object.assign(allAnswers, answers[key]);
+           }
+
+            // Atualizar os campos ocultos do formulário com os dados
+            const idcadastro = localStorage.getItem('idcadastro');
+            document.getElementById('idcadastro').value = idcadastro;
+            document.getElementById('answrange').value = JSON.stringify(allAnswers);
+
+            // Submeter o formulário
+            document.getElementById("questionForm").submit();
         }
 
-            function resetAnswers() {
-              localStorage.clear();
-              location.reload();
-            }
+
+
+
+      function resetAnswers() {
+        localStorage.clear();
+        location.reload();
+      }
 
       
       renderPage(currentPage);
