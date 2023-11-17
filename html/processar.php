@@ -31,9 +31,13 @@ include ('db_conf.php');
    // ID do cadastro inserido
    $idcadastro = $pdo->lastInsertId();
    //insere no localstorage o idcadastro
-   echo '<script>localStorage.setItem("idcadastro", ' . $idcadastro . ')</script>';
-   //Redireciona para a próxima página com o ID do cadastro
-   header("Location: esp.php");
+   // Insere no localStorage o idcadastro como uma string JSON após o carregamento da página
+   echo '<script>
+      document.addEventListener("DOMContentLoaded", function() {
+         localStorage.setItem("idcadastro", \'' . json_encode($idcadastro) . '\');
+         window.location.href = "esp.php";
+      });
+   </script>';
 
 
 } catch (PDOException $e) {
