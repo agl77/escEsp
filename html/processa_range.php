@@ -47,7 +47,7 @@ try {
     //echo "answrange " . print_r($answrange, true);
     //echo "<br> sql " . $sql;
     //echo "<br> values " . $valuesSql;
-    echo "<br> fullsql" . $fullSql;
+    //echo "<br> fullsql" . $fullSql;
     //echo "<br> bind " . print_r($bindValues, true);
     //echo "<br><br> " . print_R($indices, true);
     
@@ -55,7 +55,7 @@ try {
     // Executando a consulta com os valores vinculados
     $stmt->execute($bindValues);
 
-    //header("Location: range.html");
+    header("Location: agradecimento.html");
 } catch (PDOException $e) {
     echo "Erro ao inserir os dados: " . $e->getMessage();
 }
