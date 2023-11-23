@@ -21,7 +21,7 @@ try {
    $stmt->execute([$idcadastro, $liked, $disliked, implode(', ', $selectedValues)]);
 
    //Redireciona para a próxima página
-   header("Location: perguntas.html");
+   header("Location: paginado.php");
 
 } catch (PDOException $e) {
    echo "Erro ao inserir os dados: " . $e->getMessage();
