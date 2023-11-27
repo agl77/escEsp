@@ -9,9 +9,7 @@ include ('db_conf.php');
    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
    // Dados do formulário
-   $nome = $_POST['nome'];
    $nascimento = $_POST['data_nascimento'];
-   $cpf = $_POST['cpf'];
    $email = $_POST['email'];
    $telefone = $_POST['telefone'];
    $instituicao = $_POST['instituicao'];
@@ -21,9 +19,9 @@ include ('db_conf.php');
    $aceitarTermos = isset($_POST['aceitar_termos']) ? 1 : 0;
 
    //Insere os dados na tabela 'cadastro'
-   $sql = "INSERT INTO cadastro (nome, nascimento, CPF, email, telefone, instituicao, formado, periodo, especialidade, aceite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+   $sql = "INSERT INTO cadastro (nascimento, email, telefone, instituicao, formado, periodo, especialidade, aceite) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
    $stmt = $pdo->prepare($sql);
-   $stmt->execute([$nome, $nascimento, $cpf, $email, $telefone, $instituicao, $formado, $periodo, $especialidade, $aceitarTermos]);
+   $stmt->execute([$nascimento, $email, $telefone, $instituicao, $formado, $periodo, $especialidade, $aceitarTermos]);
 
     //zera o localstorage
     echo '<script>localStorage.clear();</script>';
@@ -33,10 +31,10 @@ include ('db_conf.php');
    //insere no localstorage o idcadastro
    // Insere no localStorage o idcadastro como uma string JSON após o carregamento da página
    echo '<script>
-      document.addEventListener("DOMContentLoaded", function() {
-         localStorage.setItem("idcadastro", \'' . json_encode($idcadastro) . '\');
-         window.location.href = "esp.php";
-      });
+   document.addEventListener("DOMContentLoaded", function() {
+      localStorage.setItem("idcadastro", ' . $idcadastro . ');
+      window.location.href = "esp.php";
+   });
    </script>';
 
 

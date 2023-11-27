@@ -9,6 +9,8 @@
 <body>
     <div class="container">
         <h1 class="mt-4">Cadastro do Entrevistado</h1>
+        <p>A escolha da especialidade médica pelos acadêmicos ao final da Graduação em Medicina é frequentemente objeto de dúvida e angústia. Há programas e iniciativas de apoio à escolha da especialidade médica, mas não há instrumentos adaptados à realidade brasileira da profissão médica. O presente estudo visa a proposição de um Instrumento de Apoio à Escolha da Especialidade Médica para Estudantes de Medicina, que contemple tanto as bases de personalidade do indivíduo quanto seus interesses pessoais, adaptado ao cenário do profissional médico especialista brasileiro.dps</p>
+        <p>Convidamos o(a) Sr(a). a participar desta pesquisa, respondendo perguntas inerentes a rotina de cada médico nos mais diversos cenários da vida cotidiana, além de perguntas sobre gostos e valores pessoais. Essas perguntas compõe o instrumento que visamos implementar. Sua resposta, caro Aluno de Medicina e caro Colega Médico Especialista, nos auxiliará a avaliar a funcionalidade e eficácia deste teste por nós elaborado. Agradecemos muito sua participação e nos colocamos à disposição para agendamento de horário para receber feedback quanto aos resultados de sua testagem em particular.</p>
         <p>Após iniciar o cadastro, inicia-se o questionário que deve ser respondido integralmente, pois não pode ser retomado posteriormente. O questionário está dividido em três partes:</p>
 
         <p>Na primeira parte, você terá a oportunidade de arrastar 5 especialidades médicas que mais gosta e 5 que menos gosta.</p>
@@ -19,12 +21,7 @@
 
         <form action="processar.php" method="post" class="mt-4">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome" class="form-control" required>
-                    </div>
-                </div>
+               
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="data_nascimento">Data de Nascimento:</label>
@@ -32,15 +29,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="cpf">CPF:</label>
-                    <input type="text" id="cpf" name="cpf" class="form-control" required pattern="\d{3}.\d{3}.\d{3}-\d{2}" placeholder="123.456.789-09">
-                </div>
-                
-                <div class="form-group">
                     <label for="email">E-mail:</label>
                     <input type="email" id="email" name="email" class="form-control" required>
                 </div>
-                
                 <div class="form-group">
                     <label for="telefone">Telefone com DDD:</label>
                     <input type="text" id="telefone" name="telefone" class="form-control" required pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" placeholder="(99) 99999-9999">
@@ -107,23 +98,7 @@
                      btnCadastrar.disabled = !aceitarTermosCheckbox.checked;
                 });
 
-                // Função para formatar automaticamente o campo CPF
                 
-                var cpfInput = document.getElementById("cpf");
-                cpfInput.addEventListener("input", function () {
-                    var value = cpfInput.value.replace(/\D/g, ""); // Remove todos os caracteres não numéricos
-                    if (value.length > 0) {
-                        if (value.length <= 11) {
-                            value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-                        } else {
-                            // Limita o comprimento a 11 dígitos
-                            value = value.slice(0, 11);
-                        }
-                        cpfInput.value = value;
-                    }
-                });
-
-
                 // Função para formatar automaticamente o campo de telefone com DDD
                 var telefoneInput = document.getElementById("telefone");
                 telefoneInput.addEventListener("input", function () {
