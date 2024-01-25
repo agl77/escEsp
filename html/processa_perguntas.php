@@ -11,39 +11,53 @@ try {
     // Convertendo as respostas de JSON para um array associativo
     $answers = json_decode($_POST['answers'], true);
 
-    // Construindo a parte do SQL para as perguntas
-    $sql = "INSERT INTO question (idcadastro, ";
-    $values = "VALUES (?, ";
-    
-    foreach ($answers as $question => $answer) {
-        $sql .= "$question, ";
-        $values .= "?, ";
+    // Consulta para verificar se já existe uma linha com o mesmo idcadastro
+    $checkQuery = "SELECT idcadastro FROM question WHERE idcadastro = ?";
+    $checkStatement = $pdo->prepare($checkQuery);
+    $checkStatement->execute([$idcadastro]);
+    $existingRow = $checkStatement->fetch(PDO::FETCH_ASSOC);
+
+    if ($existingRow) {
+        // Já existe uma linha, então atualiza os valores
+        $updateSql = "UPDATE question SET ";
+        $updateValues = [];
+        foreach ($answers as $question => $answer) {
+            $updateSql .= "$question = ?, ";
+            $updateValues[] = $answer;
+        }
+        // Removendo a vírgula extra no final da string SQL
+        $updateSql = rtrim($updateSql, ", ");
+        $updateSql .= " WHERE idcadastro = ?";
+
+        // Adiciona o idcadastro para o array de valores da atualização
+        $updateValues[] = $idcadastro;
+
+        // Preparando e executando a consulta de atualização
+        $updateStmt = $pdo->prepare($updateSql);
+        $updateStmt->execute($updateValues);
+    } else {
+        // Não existe uma linha, então insere os valores
+        $insertSql = "INSERT INTO question (idcadastro, ";
+        $values = "VALUES (?, ";
+        foreach ($answers as $question => $answer) {
+            $insertSql .= "$question, ";
+            $values .= "?, ";
+        }
+        // Removendo a vírgula extra no final das strings SQL
+        $insertSql = rtrim($insertSql, ", ") . ")";
+        $values = rtrim($values, ", ") . ")";
+
+        // Montando a consulta SQL completa
+        $fullInsertSql = "$insertSql $values";
+
+        // Preparando e executando a consulta de inserção
+        $insertValues = array_merge([$idcadastro], array_values($answers));
+        $insertStmt = $pdo->prepare($fullInsertSql);
+        $insertStmt->execute($insertValues);
     }
-
-    // Removendo a vírgula extra no final das strings SQL
-    $sql = rtrim($sql, ", ") . ")";
-    $values = rtrim($values, ", ") . ")";
-
-    // Montando a consulta SQL completa
-    $fullSql = "$sql $values";
-
-    // Preparando e executando a consulta
-    $stmt = $pdo->prepare($fullSql);
-
-    // Montando o array de valores a serem vinculados
-    $bindValues = array_merge([$idcadastro], array_values($answers));
-
-    //echo "answers " . $answer;
-    //echo "<br> sql " . $sql;
-    //echo "<br> values " . $values;
-    //echo "<br> fullsql" . $fullSql;
-    //echo "<br> bind " . $bindValues;
-
-    // Executando a consulta com os valores vinculados
-    $stmt->execute($bindValues);
 
     header("Location: range.html");
 } catch (PDOException $e) {
-  echo "Erro ao inserir os dados: " . $e->getMessage();
+    echo "Erro ao inserir/atualizar os dados: " . $e->getMessage();
 }
 ?>

@@ -2,6 +2,10 @@
 include('db_conf.php');
 
 try {
+    // Conectar ao banco de dados
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     // Dados do formulário
     $idcadastro = $_POST['idcadastro'];
   
@@ -21,39 +25,42 @@ try {
     // Obtém os índices da primeira entrada (assumindo que há pelo menos uma entrada)
     //$indices = array_keys($answrange[*]);
     
+    // Consulta para verificar se já existe uma linha com o mesmo idcadastro
+    $checkQuery = "SELECT idcadastro FROM slide WHERE idcadastro = ?";
+    $checkStatement = $pdo->prepare($checkQuery);
+    $checkStatement->execute([$idcadastro]);
+    $existingRow = $checkStatement->fetch(PDO::FETCH_ASSOC);
     
-    // Conectar ao banco de dados
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    if ($existingRow) {
+        // Se já existe a linha, ele faz o update do valor
+        $updateQuery = "UPDATE slide SET ";
+        $updateQuery .= implode(" = ?, ", $indices) . " = ?";  // Adiciona placeholders para cada coluna
+        $updateQuery .= " WHERE idcadastro = ?";
+        
+        $stmt = $pdo->prepare($updateQuery);
+        
+        // Montando o array de valores a serem vinculados
+        $bindValues = array_merge(array_values($valores), [$idcadastro]);
 
-    // Construindo a parte do SQL para as perguntas
-    $sql = "INSERT INTO slide (idcadastro, " . implode(", ", $indices) . ")";
-    $valuesSql = "VALUES (?, " . rtrim(str_repeat("?, ", count($indices)), ', ') . ")";
-    
-    // Montando a consulta SQL completa
-    $fullSql = "$sql $valuesSql";
+        // Executando a consulta com os valores vinculados
+        $stmt->execute($bindValues);
+        
+    } else {
+        // Construindo a parte do SQL para as perguntas
+        $sql = "INSERT INTO slide (idcadastro, " . implode(", ", $indices) . ")";
+        $valuesSql = "VALUES (?, " . rtrim(str_repeat("?, ", count($indices)), ', ') . ")";
+        
+        // Montando a consulta SQL completa
+        $fullSql = "$sql $valuesSql";
 
-    // Preparando e executando a consulta
-    $stmt = $pdo->prepare($fullSql);
-     
-    // Exibindo os valores
-    //print_r($valores);
-
-
-
-    // Montando o array de valores a serem vinculados
-    $bindValues = array_merge([$idcadastro], array_values($valores));
-    
-    //echo "answrange " . print_r($answrange, true);
-    //echo "<br> sql " . $sql;
-    //echo "<br> values " . $valuesSql;
-    //echo "<br> fullsql" . $fullSql;
-    //echo "<br> bind " . print_r($bindValues, true);
-    //echo "<br><br> " . print_R($indices, true);
-    
-
-    // Executando a consulta com os valores vinculados
-    $stmt->execute($bindValues);
+        // Preparando e executando a consulta
+        $stmt = $pdo->prepare($fullSql);
+        
+        // Montando o array de valores a serem vinculados
+        $bindValues = array_merge([$idcadastro], array_values($valores));
+        // Executando a consulta com os valores vinculados
+        $stmt->execute($bindValues);
+    }
 
     header("Location: agradecimento.html");
 } catch (PDOException $e) {
