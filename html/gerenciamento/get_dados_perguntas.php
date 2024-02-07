@@ -21,7 +21,7 @@ if (isset($_GET['idcadastro'])) {
     } catch (PDOException $e) {
         echo "Erro ao obter os dados: " . $e->getMessage();
     }
-} else {
+} else { 
     echo "ID do cadastro não fornecido.";
 }
 ?>
