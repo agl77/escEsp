@@ -4,4 +4,3 @@ $username = "teste";
 $password = "teste";
 $dbname = "teste";
 ?>
-

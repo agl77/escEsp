@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Questionário Vocacional de Especialidade Médica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <p><br /><b>Página 1</b></p>
+      <p>Supondo que você está em um congresso médico. Estão presentes muitas pessoas conhecidas e desconhecidas. Há muita movimentação na área dos expositores. Grupos de médicos reunidos, discutindo temas e também se entretendo, com pessoas de diferentes localidades se reencontrando. Então você...</p>
+      <form id="page1Form" action="processar.php" method="post">
+        <!-- Questão 1 -->
+        <label>Questão 01:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta001" value="A" id="opcaoA001" />
+          <label class="form-check-label" for="opcaoA001"> A- Aprecia todo esse movimento </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta001" value="B" id="opcaoB001" />
+          <label class="form-check-label" for="opcaoB001"> B- Pensa se não é melhor ir para o hotel onde está hospedado </label>
+        </div>
+
+        <!-- Questão 2 -->
+        <label>Questão 02:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta002" value="A" id="opcaoA002" />
+          <label class="form-check-label" for="opcaoA002"> A- Fica atento a oportunidades de contato de network que possam surgir </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta002" value="B" id="opcaoB002" />
+          <label class="form-check-label" for="opcaoB002"> B- Presta atenção especial na organização do evento e nos detalhes de cada stand de exposição </label>
+        </div>
+
+        <!-- Questão 3 -->
+        <label>Questão 03:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta003" value="A" id="opcaoA003" />
+          <label class="form-check-label" for="opcaoA003"> A- Procura um grupo de colegas e conversa sobre suas ideias e opiniões </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta003" value="B" id="opcaoB003" />
+          <label class="form-check-label" for="opcaoB003"> B- Prefere conversar sobre o que as pessoas gostam e pergunta0r sobre o que elas estão fazendo </label>
+        </div>
+        <!-- Questão 4 -->
+        <label>Questão 04:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta004" value="A" id="opcaoA004" />
+          <label class="form-check-label" for="opcaoA004"> A- Fica atento a tudo e todos em sua volta </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta004" value="B" id="opcaoB004" />
+          <label class="form-check-label" for="opcaoB004"> B- Fica mais introspectivo, centrado no incômodo pessoal </label>
+        </div>
+
+        <!-- Questão 5 -->
+        <label>Questão 05:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta005" value="A" id="opcaoA005" />
+          <label class="form-check-label" for="opcaoA005"> A- Não fica reparando nos detalhes do evento </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta005" value="B" id="opcaoB005" />
+          <label class="form-check-label" for="opcaoB005"> B- Se concentra em todos os detalhes do evento de exposição / organização das palestras e não os esquecerá</label>
+        </div>
+
+        <!-- Questão 6 -->
+        <label>Questão 06:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta006" value="A" id="opcaoA006" />
+          <label class="form-check-label" for="opcaoA006"> A- Não hesita em questionar os pontos de vista dos palestrantes </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta006" value="B" id="opcaoB006" />
+          <label class="form-check-label" for="opcaoB006"> B- Procura não tecer críticas ou questionamentos contrários para não criar um clima de incômodo </label>
+        </div>
+
+        <!-- Questão 7 -->
+        <label>Questão 07:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta007" value="A" id="opcaoA007" />
+          <label class="form-check-label" for="opcaoA007"> A- Procura conversar com o maior número possível de colegas, se apresentando e falando de seu trabalho </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta007" value="B" id="opcaoB007" />
+          <label class="form-check-label" for="opcaoB007"> B- Conversa apenas com poucas e conhecidas pessoas </label>
+        </div>
+
+        <!-- Questão 8 -->
+        <label>Questão 08:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta008" value="A" id="opcaoA008" />
+          <label class="form-check-label" for="opcaoA008"> A- Não se preocupa em aproveitar o conforto e regalias dos stands de laboratório; isso não lhe chama a atenção </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta008" value="B" id="opcaoB008" />
+          <label class="form-check-label" for="opcaoB008"> B- Aproveita com prazer o conforto do ambiente </label>
+        </div>
+
+        <!-- Questão 9 -->
+        <label>Questão 09:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta009" value="A" id="opcaoA009" />
+          <label class="form-check-label" for="opcaoA009"> A- Conversa sobre suas ideias de maneira clara a quem se aproxima, expondo sua carreira profissional  </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta009" value="B" id="opcaoB009" />
+          <label class="form-check-label" for="opcaoB009"> B- Torna-se receptível e amigável a quem se aproxima, focando no outro </label>
+        </div>
+
+        <!-- Questão 10 -->
+        <label>Questão 10:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta010" value="A" id="opcaoA010" />
+          <label class="form-check-label" for="opcaoA010"> A- Não liga para o fato de haver tantas pessoas desconhecidas e muitas vezes exponenciais </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta010" value="B" id="opcaoB010" />
+          <label class="form-check-label" for="opcaoB010"> B- Fica retraído com tantos desconhecidos e evita conhecê-los </label>
+        </div>
+
+        <!-- Questão 11 -->
+        <label>Questão 11:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta011" value="A" id="opcaoA011" />
+          <label class="form-check-label" for="opcaoA011"> A- Já fica imaginando onde será o próximo congresso </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta011" value="B" id="opcaoB011" />
+          <label class="form-check-label" for="opcaoB011"> B- Pensa nos problemas práticos que ocorreram para se organizar um evento daquela dimensão </label>
+        </div>
+        <!-- Questão 12 -->
+        <label>Questão 12:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta012" value="A" id="opcaoA012" />
+          <label class="form-check-label" for="opcaoA012"> A- Numa conversa, pode discordar e sustenta sua ideia até o fim </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta012" value="B" id="opcaoB012" />
+          <label class="form-check-label" for="opcaoB012"> B- Concorda com os outros para não causar desconforto </label>
+        </div>
+
+        <!-- Questão 13 -->
+        <label>Questão 13:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta013" value="A" id="opcaoA013" />
+          <label class="form-check-label" for="opcaoA013"> A- Quando foi notificado sobre o evento, de imediato decidiu que participaria </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta013" value="B" id="opcaoB013" />
+          <label class="form-check-label" for="opcaoB013"> B- Quando foi notificado sobre o evento, pensou nos custos x benefícios de participar </label>
+        </div>
+
+        <!-- Questão 14 -->
+        <label>Questão 14:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta014" value="A" id="opcaoA014" />
+          <label class="form-check-label" for="opcaoA014"> A- Não fica reparando no que os outros fazem ou seu sucesso profissional </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta014" value="B" id="opcaoB014" />
+          <label class="form-check-label" for="opcaoB014"> B- Repara no comportamento ou escolhas de carreira não convencionais </label>
+        </div>
+
+        <!-- Questão 15 -->
+        <label>Questão 15:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta015" value="A" id="opcaoA015" />
+          <label class="form-check-label" for="opcaoA015"> A- Não se importa em criticar nem mesmo os principais palestrantes, se isso for necessário </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta015" value="B" id="opcaoB015" />
+          <label class="form-check-label" for="opcaoB015"> B- Procura ressaltar os pontos positivos do evento para quem o promoveu </label>
+        </div>
+
+        <!-- Questão 16 -->
+        <label>Questão 16:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta016" value="A" id="opcaoA016" />
+          <label class="form-check-label" for="opcaoA016"> A- Escolhe as palestras voltadas para inovações tecnológicas no âmbito da Medicina </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta016" value="B" id="opcaoB016" />
+          <label class="form-check-label" for="opcaoB016"> B- Prefere palestras que tratam das experiências de outros médicos no manejo do paciente e atividades em educação médica </label>
+        </div>
+
+        <!-- Questão 17 -->
+        <label>Questão 17:</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta017" value="A" id="opcaoA017" />
+          <label class="form-check-label" for="opcaoA017"> A- Busca contato com os laboratórios farmacêuticos, procurando participar como speaker de consultoria técnica dos mesmos </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="pergunta017" value="B" id="opcaoB017" />
+          <label class="form-check-label" for="opcaoB017"> B- Aproveita para conversar com o suporte médico dos laboratórios em busca de detalhes de desenvolvimento químico-farmacêutico de novos princípios ativos de medicações  </label>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

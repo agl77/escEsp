@@ -20,7 +20,9 @@ include ('db_conf.php');
 
    //Insere os dados na tabela 'cadastro'
    $sql = "INSERT INTO cadastro (nascimento, email, telefone, instituicao, formado, periodo, especialidade, aceite) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+   echo $sql;
    $stmt = $pdo->prepare($sql);
+   echo $nascimento, $email, $telefone, $instituicao, $formado, $periodo, $especialidade, $aceitarTermos;
    $stmt->execute([$nascimento, $email, $telefone, $instituicao, $formado, $periodo, $especialidade, $aceitarTermos]);
 
     //zera o localstorage
