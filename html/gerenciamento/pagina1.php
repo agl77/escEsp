@@ -6,195 +6,165 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
   </head>
   <body>
-    <div class="container">
-      <p><br /><b>Página 1</b></p>
-      <p>Supondo que você está em um congresso médico. Estão presentes muitas pessoas conhecidas e desconhecidas. Há muita movimentação na área dos expositores. Grupos de médicos reunidos, discutindo temas e também se entretendo, com pessoas de diferentes localidades se reencontrando. Então você...</p>
-      <form id="page1Form" action="processar.php" method="post">
-        <!-- Questão 1 -->
-        <label>Questão 01:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta001" value="A" id="opcaoA001" />
-          <label class="form-check-label" for="opcaoA001"> A- Aprecia todo esse movimento </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta001" value="B" id="opcaoB001" />
-          <label class="form-check-label" for="opcaoB001"> B- Pensa se não é melhor ir para o hotel onde está hospedado </label>
-        </div>
+    <?php
+    // Dados das respostas do localStorage em formato JSON
+    $respostas_json = isset($_GET["dadosCadastro"]) ? $_GET["dadosCadastro"] : "[]";
 
-        <!-- Questão 2 -->
-        <label>Questão 02:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta002" value="A" id="opcaoA002" />
-          <label class="form-check-label" for="opcaoA002"> A- Fica atento a oportunidades de contato de network que possam surgir </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta002" value="B" id="opcaoB002" />
-          <label class="form-check-label" for="opcaoB002"> B- Presta atenção especial na organização do evento e nos detalhes de cada stand de exposição </label>
-        </div>
+    // Decodifica os dados JSON em um array associativo
+    $respostas = json_decode($respostas_json, true);
 
-        <!-- Questão 3 -->
-        <label>Questão 03:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta003" value="A" id="opcaoA003" />
-          <label class="form-check-label" for="opcaoA003"> A- Procura um grupo de colegas e conversa sobre suas ideias e opiniões </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta003" value="B" id="opcaoB003" />
-          <label class="form-check-label" for="opcaoB003"> B- Prefere conversar sobre o que as pessoas gostam e pergunta0r sobre o que elas estão fazendo </label>
-        </div>
-        <!-- Questão 4 -->
-        <label>Questão 04:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta004" value="A" id="opcaoA004" />
-          <label class="form-check-label" for="opcaoA004"> A- Fica atento a tudo e todos em sua volta </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta004" value="B" id="opcaoB004" />
-          <label class="form-check-label" for="opcaoB004"> B- Fica mais introspectivo, centrado no incômodo pessoal </label>
-        </div>
+    // Define um array associativo que mapeia cada resposta à sua pontuação correspondente
+    $pontuacao_respostas = [
+      "pergunta001" => ["A" => "Extroversão", "B" => "Intuição"],
+      "pergunta002" => ["A" => "Intuição", "B" => "Sensação"],
+      "pergunta003" => ["A" => "Pensamento", "B" => "Sentimento"],
+      "pergunta004" => ["A" => "Extroversão", "B" => "Introversão"],
+      "pergunta005" => ["A" => "Intuição", "B" => "Organizacional/Administrativo", "C" => "Sensação"],
+      "pergunta006" => ["A" => "Comunicação/Persuasão", "B" => "Pensamento", "C" => "Sentimento"],
+      "pergunta007" => ["A" => "Comunicação/Persuasão", "B" => "Extroversão", "C" => "Introversão"],
+      "pergunta008" => ["A" => "Intuição", "B" => "Sensação"],
+      "pergunta009" => ["A" => "Comunicação/Persuasão", "B" => "Pensamento", "C" => "Sentimento"],
+      "pergunta010" => ["A" => "Extroversão", "B" => "Introversão"],
+      "pergunta011" => ["A" => "Intuição", "B" => "Organizacional/Administrativo", "C" => "Sensação"],
+      "pergunta012" => ["A" => "Pensamento", "B" => "Sentimento"],
+      "pergunta013" => ["A" => "Extroversão", "B" => "Cálculo/Finanças", "C" => "Introversão"],
+      "pergunta014" => ["A" => "Intuição", "B" => "Comportamental/Educacional", "C" => "Sensação"],
+      "pergunta015" => ["A" => "Pensamento", "B" => "Simbólico/Linguístico", "C" => "Sentimento"],
+      "pergunta016" => ["A" => "Físico-Matemático", "B" => "Saúde"],
+      "pergunta017" => ["A" => "Comportamental-Educacional", "B" => "Físico-Químico"],
+      "pergunta018" => ["A" => "Organizacional-Administrativo", "B" => "Extroversão", "C" => "Paciente (Saúde)", "D" => "Introversão"],
+      "pergunta019" => ["A" => "Saúde", "B" => "Intuição", "C" => "Cálculo/Finanças", "D" => "Sensação"],
+      "pergunta020" => ["A" => "Organizacional/Administrativo", "B" => "Pensamento", "C" => "Jurídico/Social", "D" => "Sentimento"],
+      "pergunta021" => ["A" => "Extroversão", "B" => "Cálculo/Finanças", "C" => "Introversão"],
+      "pergunta022" => ["A" => "Cálculo/Finanças", "B" => "Intuição", "C" => "Organizacional/Administrativo", "D" => "Sensação"],
+      "pergunta023" => ["A" => "Jurídico/Social", "B" => "Pensamento", "C" => "Comportamental/Educacional", "D" => "Sentimento"],
+      "pergunta024" => ["A" => "Simbólico/Linguístico", "B" => "Extroversão", "C" => "Introversão"],
+      "pergunta025" => ["A" => "Simbólico/Linguístico", "B" => "Intuição", "C" => "Organizacional/Administrativo", "D" => "Sensação"],
+      "pergunta026" => ["A" => "Pensamento", "B" => "Sentimento"],
+      "pergunta027" => ["A" => "Extroversão", "B" => "Introversão"],
+      "pergunta028" => ["A" => "Organizacional/Administrativo", "B" => "Intuição", "C" => "Sensação"],
+      "pergunta029" => ["A" => "Cálculo/Finanças", "B" => "Pensamento", "C" => "Organizacional/Administrativo", "D" => "Sentimento"],
+      "pergunta030" => ["A" => "Extroversão", "B" => "Introversão"],
+      "pergunta031" => ["A" => "Comunicação/Persuasão", "B" => "Intuição", "C" => "Cálculo/Finanças", "D" => "Sensação"],
+      "pergunta032" => ["A" => "Físico/Matemático", "B" => "Pensamento", "C" => "Saúde", "D" => "Sentimento"],
+      "pergunta033" => ["A" => "Físico/Matemático", "B" => "Simbólico/Linguístico"],
+      "pergunta034" => ["A" => "Organizacional/Administrativo", "B" => "Simbólico/Linguístico"],
+      "pergunta035" => ["A" => "Extroversão", "B" => "Organizacional/Administrativo", "C" => "Introversão"],
+      "pergunta036" => ["A" => "Intuição", "B" => "Cálculo/Finanças", "C" => "Sensação"],
+      "pergunta037" => ["A" => "Cálculo/Finanças", "B" => "Pensamento", "C" => "Manual/Artístico"],
+      "pergunta038" => ["A" => "Comunicação/Persuasão", "B" => "Extroversão", "C" => "Organizacional/Administrativo", "D" => "Introversão"],
+      "pergunta039" => ["A" => "Organizacional/Administrativo", "B" => "Intuição", "C" => "Comunicação/Persuasão", "D" => "Sensação"],
+      "pergunta040" => ["A" => "Comportamental/Educacional", "B" => "Pensamento", "C" => "Manual/Artístico", "D" => "Sentimento"],
+      "pergunta041" => ["A" => "Extroversão", "B" => "Introversão"],
+      "pergunta042" => ["A" => "Organizacional/Administrativo", "B" => "Intuição", "C" => "Comportamental/Educacional", "D" => "Sensação"],
+      "pergunta043" => ["A" => "Físico/Matemático", "B" => "Pensamento", "C" => "Manual/Artístico", "D" => "Sentimento"],
+      "pergunta044" => ["A" => "Cálculo/Finanças", "B" => "Extroversão", "C" => "Simbólico/Linguístico", "D" => "Introversão"],
+      "pergunta045" => ["A" => "Intuição", "B" => "Sensação"],
+      "pergunta046" => ["A" => "Pensamento", "B" => "Jurídico/Social", "C" => "Sentimento"],
+      "pergunta047" => ["A" => "Extroversão", "B" => "Introversão"],
+      "pergunta048" => ["A" => "Simbólico/Linguístico", "B" => "Intuição", "C" => "Manual/Artístico", "D" => "Sensação"],
+      "pergunta049" => ["A" => "Cálculo/Finanças", "B" => "Pensamento", "C" => "Simbólico/Linguístico", "D" => "Sentimento"],
+      "pergunta050" => ["A" => "Manual/Artístico", "B" => "Cálculo/Finanças"],
+      "pergunta051" => ["A" => "Comunicação/Persuasão", "B" => "Extroversão", "C" => "Introversão"],
+      "pergunta052" => ["A" => "Manual/Artístico", "B" => "Intuição", "C" => "Físico/Matemático", "D" => "Sensação"],
+      "pergunta053" => ["A" => "Físico/Químico", "B" => "Pensamento", "C" => "Sentimento"],
+      "pergunta054" => ["A" => "Extroversão", "B" => "Introversão"],
+      "pergunta055" => ["A" => "Ideias (Simbólico/Linguístico)", "B" => "Intuição", "C" => "Físico/Matemático", "D" => "Sensação"],
+      "pergunta056" => ["A" => "Cálculo/Finanças", "B" => "Pensamento", "C" => "Comunicação/Persuasão", "D" => "Sentimento"],
+      "pergunta057" => ["A" => "Comunicação/Persuasão", "B" => "Extroversão", "C" => "Introversão"],
+      "pergunta058" => ["A" => "Intuição", "B" => "Cálculo/Finanças", "C" => "Sensação"],
+      "pergunta059" => ["A" => "Físico/Matemático", "B" => "Pensamento", "C" => "Simbólico/Linguístico", "D" => "Sentimento"],
+      "pergunta060" => ["A" => "Comunicação/Persuasão", "B" => "Extroversão", "C" => "Simbólico/Linguístico", "D" => "Introversão"],
+      "pergunta061" => ["A" => "Físico/Matemático", "B" => "Intuição", "C" => "Cálculo/Finanças", "D" => "Sensação"],
+      "pergunta062" => ["A" => "Jurídico/Social", "B" => "Pensamento", "C" => "Comunicação/Persuasão", "D" => "Sentimento"],
+      "pergunta063" => ["A" => "Comportamental/Educacional", "B" => "Extroversão", "C" => "Manual/Artístico", "D" => "Introversão"],
+      "pergunta064" => ["A" => "Físico/Matemático", "B" => "Intuição", "C" => "Físico/Químico", "D" => "Sensação"],
+      "pergunta065" => ["A" => "Simbólico/Linguístico", "B" => "Pensamento", "C" => "Jurídico/Social", "D" => "Sentimento"],
+      "pergunta066" => ["A" => "Comunicação/Persuasão", "B" => "Simbólico/Linguístico"],
+      "pergunta067" => ["A" => "Organizacional/Administrativo", "B" => "Cálculo/Finanças"],
+      "pergunta068" => ["A" => "Físico/Matemático", "B" => "Comportamental/Educacional"],
+      "pergunta069" => ["A" => "Físico/Químico", "B" => "Jurídico/Social"],
+      "pergunta070" => ["A" => "Extroversão", "B" => "Introversão"],
+      "pergunta071" => ["A" => "Intuição", "B" => "Cálculo/Finanças", "C" => "Sensação"],
+      "pergunta072" => ["A" => "Físico/Matemático", "B" => "Pensamento", "C" => "Saúde", "D" => "Sentimento"],
+      "pergunta073" => ["A" => "Comunicação/Persuasão", "B" => "Extroversão", "C" => "Introversão"],
+      "pergunta074" => ["A" => "Manual/Artístico", "B" => "Intuição", "C" => "Organizacional/Administrativo", "D" => "Sensação"],
+      "pergunta075" => ["A" => "Físico/Matemático", "B" => "Pensamento", "C" => "Simbólico/Linguístico", "D" => "Sentimento"],
+      "pergunta076" => ["A" => "Saúde", "B" => "Extroversão", "C" => "Manual/Artístico", "D" => "Introversão"],
+      "pergunta077" => ["A" => "Manual/Artístico", "B" => "Intuição", "C" => "Organizacional/Administrativo", "D" => "Sensação"],
+      "pergunta078" => ["A" => "Jurídico/Social", "B" => "Pensamento", "C" => "Comunicação/Persuasão", "D" => "Sentimento"],
+      "pergunta079" => ["A" => "Extroversão", "B" => "Introversão"],
+      "pergunta080" => ["A" => "Cálculo/Finanças", "B" => "Intuição", "C" => "Manual/Artístico", "D" => "Sensação"],
+      "pergunta081" => ["A" => "Pensamento", "B" => "Sentimento"],
+      "pergunta082" => ["A" => "Extroversão", "B" => "Introversão"],
+      "pergunta083" => ["A" => "Simbólico/Linguístico", "B" => "Intuição", "C" => "Comunicação/Persuasão", "D" => "Sensação"],
+      "pergunta084" => ["A" => "Organizacional/Administrativo", "B" => "Pensamento", "C" => "Comunicação/Persuasão", "D" => "Sentimento"],
+      "pergunta085" => ["A" => "Comportamental/Educacional", "B" => "Jurídico/Social"],
+      "pergunta086" => ["A" => "Saúde", "B" => "Organizacional/Administrativo"],
+      "pergunta087" => ["A" => "Comunicação/Persuasão", "B" => "Extroversão", "C" => "Comportamental/Educacional", "D" => "Introversão"],
+      "pergunta088" => ["A" => "Simbólico/Linguístico", "B" => "Intuição", "C" => "Físico/Matemático", "D" => "Sensação"],
+      "pergunta089" => ["A" => "Cálculo/Finanças", "B" => "Pensamento", "C" => "Simbólico/Linguístico", "D" => "Sentimento"],
+      "pergunta090" => ["A" => "Comunicação/Persuasão", "B" => "Extroversão", "C" => "Físico/Químico", "D" => "Introversão"],
+      "pergunta091" => ["A" => "Cálculo/Finanças", "B" => "Intuição", "C" => "Organizacional/Administrativo", "D" => "Sensação"],
+      "pergunta092" => ["A" => "Físico/Matemático", "B" => "Pensamento", "C" => "Comunicação/Persuasão", "D" => "Sentimento"],
+      "pergunta093" => ["A" => "Comportamental/Educacional", "B" => "Extroversão", "C" => "Manual/Artístico", "D" => "Introversão"],
+      "pergunta094" => ["A" => "Físico/Químico", "B" => "Intuição", "C" => "Cálculo/Finanças", "D" => "Sensação"],
+      "pergunta095" => ["A" => "Comportamental/Educacional", "B" => "Pensamento", "C" => "Simbólico/Linguístico", "D" => "Sentimento"],
+      "pergunta096" => ["A" => "Manual/Artístico", "B" => "Extroversão", "C" => "Cálculo/Finanças", "D" => "Introversão"],
+      "pergunta097" => ["A" => "Manual/Artístico", "B" => "Intuição", "C" => "Organizacional/Administrativo", "D" => "Sensação"],
+      "pergunta098" => ["A" => "Jurídico/Social", "B" => "Pensamento", "C" => "Saúde", "D" => "Sentimento"],
+      "pergunta099" => ["A" => "Organizacional/Administrativo", "B" => "Extroversão", "C" => "Físico/Químico", "D" => "Introversão"],
+      "pergunta100" => ["A" => "Comunicação/Persuasão", "B" => "Intuição", "C" => "Organizacional/Administrativo", "D" => "Sensação"],
+      "pergunta101" => ["A" => "Físico/Matemático", "B" => "Pensamento", "C" => "Comportamental/Educacional", "D" => "Sentimento"],
+      "pergunta102" => ["A" => "Físico/Químico", "B" => "Extroversão", "C" => "Jurídico/Social", "D" => "Introversão"],
+      "pergunta103" => ["A" => "Manual/Artístico", "B" => "Intuição", "C" => "Organizacional/Administrativo", "D" => "Sensação"],
+      "pergunta104" => ["A" => "Jurídico/Social", "B" => "Pensamento", "C" => "Manual/Artístico", "D" => "Sentimento"],
+      "pergunta105" => ["A" => "Simbólico/Linguístico", "B" => "Manual/Artístico"],
+      "pergunta106" => ["A" => "Comportamental/Educacional", "B" => "Físico/Químico"],
+      "pergunta107" => ["A" => "Comportamental/Educacional", "B" => "Físico/Químico"],
+      "pergunta108" => ["A" => "Organizacional/Administrativo", "B" => "Saúde"],
+      "pergunta109" => ["A" => "Cálculo/Finanças", "B" => "Jurídico/Social"],
+      "pergunta110" => ["A" => "Comunicação/Persuasão", "B" => "Comportamental/Educacional"],
+      "pergunta111" => ["A" => "Organizacional/Administrativo", "B" => "Simbólico/Linguístico"],
+    ];
 
-        <!-- Questão 5 -->
-        <label>Questão 05:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta005" value="A" id="opcaoA005" />
-          <label class="form-check-label" for="opcaoA005"> A- Não fica reparando nos detalhes do evento </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta005" value="B" id="opcaoB005" />
-          <label class="form-check-label" for="opcaoB005"> B- Se concentra em todos os detalhes do evento de exposição / organização das palestras e não os esquecerá</label>
-        </div>
+    // Inicializa as pontuações
+    $pontuacoes = [
+      "Extroversão" => 0,
+      "Introversão" => 0,
+      "Intuição" => 0,
+      "Sensação" => 0,
+      "Pensamento" => 0,
+      "Sentimento" => 0,
+      "Organizacional/Administrativo" => 0,
+      "Comportamental/Educacional" => 0,
+      "Físico/Matemático" => 0,
+      "Físico/Químico" => 0,
+      "Simbólico/Linguístico" => 0,
+      "Manual/Artístico" => 0,
+      "Jurídico/Social" => 0,
+      "Saúde" => 0,
+      "Cálculo/Finanças" => 0,
+  ];
 
-        <!-- Questão 6 -->
-        <label>Questão 06:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta006" value="A" id="opcaoA006" />
-          <label class="form-check-label" for="opcaoA006"> A- Não hesita em questionar os pontos de vista dos palestrantes </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta006" value="B" id="opcaoB006" />
-          <label class="form-check-label" for="opcaoB006"> B- Procura não tecer críticas ou questionamentos contrários para não criar um clima de incômodo </label>
-        </div>
+    // Itera sobre as respostas e calcula as pontuações
+    foreach ($respostas as $pergunta => $resposta) {
+        // Verifica se a resposta é diferente de null
+        if ($resposta !== null) {
+            // Obtém a pontuação correspondente à resposta
+            $pontuacao = $pontuacao_respostas[$pergunta][$resposta] ?? null;
+            // Se houver uma pontuação correspondente, incrementa a pontuação correspondente
+            if ($pontuacao !== null) {
+                $pontuacoes[$pontuacao]++;
+            }
+        }
+    }
 
-        <!-- Questão 7 -->
-        <label>Questão 07:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta007" value="A" id="opcaoA007" />
-          <label class="form-check-label" for="opcaoA007"> A- Procura conversar com o maior número possível de colegas, se apresentando e falando de seu trabalho </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta007" value="B" id="opcaoB007" />
-          <label class="form-check-label" for="opcaoB007"> B- Conversa apenas com poucas e conhecidas pessoas </label>
-        </div>
-
-        <!-- Questão 8 -->
-        <label>Questão 08:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta008" value="A" id="opcaoA008" />
-          <label class="form-check-label" for="opcaoA008"> A- Não se preocupa em aproveitar o conforto e regalias dos stands de laboratório; isso não lhe chama a atenção </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta008" value="B" id="opcaoB008" />
-          <label class="form-check-label" for="opcaoB008"> B- Aproveita com prazer o conforto do ambiente </label>
-        </div>
-
-        <!-- Questão 9 -->
-        <label>Questão 09:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta009" value="A" id="opcaoA009" />
-          <label class="form-check-label" for="opcaoA009"> A- Conversa sobre suas ideias de maneira clara a quem se aproxima, expondo sua carreira profissional  </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta009" value="B" id="opcaoB009" />
-          <label class="form-check-label" for="opcaoB009"> B- Torna-se receptível e amigável a quem se aproxima, focando no outro </label>
-        </div>
-
-        <!-- Questão 10 -->
-        <label>Questão 10:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta010" value="A" id="opcaoA010" />
-          <label class="form-check-label" for="opcaoA010"> A- Não liga para o fato de haver tantas pessoas desconhecidas e muitas vezes exponenciais </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta010" value="B" id="opcaoB010" />
-          <label class="form-check-label" for="opcaoB010"> B- Fica retraído com tantos desconhecidos e evita conhecê-los </label>
-        </div>
-
-        <!-- Questão 11 -->
-        <label>Questão 11:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta011" value="A" id="opcaoA011" />
-          <label class="form-check-label" for="opcaoA011"> A- Já fica imaginando onde será o próximo congresso </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta011" value="B" id="opcaoB011" />
-          <label class="form-check-label" for="opcaoB011"> B- Pensa nos problemas práticos que ocorreram para se organizar um evento daquela dimensão </label>
-        </div>
-        <!-- Questão 12 -->
-        <label>Questão 12:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta012" value="A" id="opcaoA012" />
-          <label class="form-check-label" for="opcaoA012"> A- Numa conversa, pode discordar e sustenta sua ideia até o fim </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta012" value="B" id="opcaoB012" />
-          <label class="form-check-label" for="opcaoB012"> B- Concorda com os outros para não causar desconforto </label>
-        </div>
-
-        <!-- Questão 13 -->
-        <label>Questão 13:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta013" value="A" id="opcaoA013" />
-          <label class="form-check-label" for="opcaoA013"> A- Quando foi notificado sobre o evento, de imediato decidiu que participaria </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta013" value="B" id="opcaoB013" />
-          <label class="form-check-label" for="opcaoB013"> B- Quando foi notificado sobre o evento, pensou nos custos x benefícios de participar </label>
-        </div>
-
-        <!-- Questão 14 -->
-        <label>Questão 14:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta014" value="A" id="opcaoA014" />
-          <label class="form-check-label" for="opcaoA014"> A- Não fica reparando no que os outros fazem ou seu sucesso profissional </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta014" value="B" id="opcaoB014" />
-          <label class="form-check-label" for="opcaoB014"> B- Repara no comportamento ou escolhas de carreira não convencionais </label>
-        </div>
-
-        <!-- Questão 15 -->
-        <label>Questão 15:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta015" value="A" id="opcaoA015" />
-          <label class="form-check-label" for="opcaoA015"> A- Não se importa em criticar nem mesmo os principais palestrantes, se isso for necessário </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta015" value="B" id="opcaoB015" />
-          <label class="form-check-label" for="opcaoB015"> B- Procura ressaltar os pontos positivos do evento para quem o promoveu </label>
-        </div>
-
-        <!-- Questão 16 -->
-        <label>Questão 16:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta016" value="A" id="opcaoA016" />
-          <label class="form-check-label" for="opcaoA016"> A- Escolhe as palestras voltadas para inovações tecnológicas no âmbito da Medicina </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta016" value="B" id="opcaoB016" />
-          <label class="form-check-label" for="opcaoB016"> B- Prefere palestras que tratam das experiências de outros médicos no manejo do paciente e atividades em educação médica </label>
-        </div>
-
-        <!-- Questão 17 -->
-        <label>Questão 17:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta017" value="A" id="opcaoA017" />
-          <label class="form-check-label" for="opcaoA017"> A- Busca contato com os laboratórios farmacêuticos, procurando participar como speaker de consultoria técnica dos mesmos </label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="pergunta017" value="B" id="opcaoB017" />
-          <label class="form-check-label" for="opcaoB017"> B- Aproveita para conversar com o suporte médico dos laboratórios em busca de detalhes de desenvolvimento químico-farmacêutico de novos princípios ativos de medicações  </label>
-        </div>
-      </form>
-    </div>
+    // Imprime as pontuações
+    foreach ($pontuacoes as $pontuacao => $pontuacao_valor) {
+        echo "$pontuacao: $pontuacao_valor<br>";
+    }
+    echo "$respostas_json";
+    ?>
   </body>
 </html>

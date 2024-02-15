@@ -169,7 +169,7 @@ function carregarInfoCadastro(idcadastro) {
         
         // Define um evento onchange para o dropdown
         selectCadastro.addEventListener('change', function() {
-         var selectedOption = this.options[this.selectedIndex];
+        var selectedOption = this.options[this.selectedIndex];
         var idCadastro = selectedOption.value.split(' - ')[0]; // Obter o idcadastro corretamente
         buscarDadosDoServidor(idCadastro); // Chama a função para buscar os dados do servidor
         });
