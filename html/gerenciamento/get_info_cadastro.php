@@ -17,7 +17,7 @@ if (isset($_GET['idcadastro'])) {
         echo "<p>Nasc: {$infoCadastro['nascimento']} - Fone: {$infoCadastro['telefone']} - Inst: {$infoCadastro['instituicao']}</p>";
 
         if ($infoCadastro['formado']) {
-            echo "<p>Formado: Sim - Ano de Conclusão: {$infoCadastro['periodo']} - Especialidade: {$infoCadastro['especialidade']}</p>";
+            echo "<p>Formado: Sim - conclusão : {$infoCadastro['periodo']} - Especialidade: {$infoCadastro['especialidade']}</p>";
         } else {
             echo "<p>Formado: Não - Período: {$infoCadastro['periodo']}</p>";
         }

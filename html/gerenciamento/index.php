@@ -80,7 +80,7 @@ try {
             echo "<div>";
             foreach ($paginas as $pagina) {
             $idcadastro = isset($_GET['idcadastro']) ? $_GET['idcadastro'] : ''; // Verifica se idcadastro está definido
-            echo "<a href='?pagina=$pagina&idcadastro=$idcadastro'>$pagina</a> "; // Usando $idcadastro
+            echo "<a href='?pagina=$pagina'>$pagina</a> "; // Usando $idcadastro
         }
         echo "</div>";
 
