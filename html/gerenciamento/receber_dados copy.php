@@ -165,12 +165,16 @@ foreach ($dadosLocalStorage as $pergunta => $resposta) {
         }
     }
 }
+
 // Calcular os percentuais para cada variável
 foreach ($pontuacoes as $variavel => $dados) {
-    $percentual = round(($dados["pontuacao"] / $dados["total_questoes"]) * 100, 1);
-    $pontuacoes[$variavel]["percentual"] = $percentual;
+    $pontuacoes[$variavel]["percentual"] = ($dados["pontuacao"] / $dados["total_questoes"]) * 100;
 }
 
+// Imprimir os percentuais
+foreach ($pontuacoes as $variavel => $dados) {
+    echo "{$variavel}: {$dados['percentual']}%<br>";
+}
 // Retorna a pontuação como JSON
-$resposta_json = json_encode($pontuacoes, JSON_UNESCAPED_UNICODE);
-echo $resposta_json;
+echo json_encode($pontuacoes);
+?>
