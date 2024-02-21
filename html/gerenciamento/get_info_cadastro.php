@@ -9,7 +9,9 @@ if (isset($_GET['idcadastro'])) {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Consulta para obter as informações do cadastro específico
-        $consulta = $pdo->prepare("SELECT * FROM cadastro WHERE idcadastro = ?");
+        $consulta = $pdo->prepare("SELECT idcadastro, DATE_FORMAT(nascimento, '%d/%m/%Y') AS nascimento, formado, instituicao, periodo, especialidade, email, telefone, aceite 
+        FROM cadastro 
+        WHERE idcadastro = ?");
         $consulta->execute([$idcadastro]);
         $infoCadastro = $consulta->fetch(PDO::FETCH_ASSOC);
 

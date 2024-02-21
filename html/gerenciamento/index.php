@@ -132,6 +132,9 @@ try {
     echo "Erro ao obter os dados: " . $e->getMessage();
 }
 ?>
+<div id="pageContent">
+      <!-- O conteúdo da página será carregado aqui -->
+</div>
 <script>
 function carregarInfoCadastro(idcadastro) {
     // Realiza uma solicitação AJAX para obter informações adicionais do cadastro

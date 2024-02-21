@@ -36,27 +36,13 @@ $_SESSION['ultima_atividade'] = $tempoAtual;
 <?php
 include('../db_conf.php');
 
-// Função para exibir o cabeçalho do cadastro
-function exibirCabecalhoCadastro($infoCadastro) {
-    // Formata a data para o formato brasileiro
-    $dataFormatada = date('d/m/Y', strtotime($infoCadastro['Nascimento']));
-
-    // Exibe o cabeçalho em uma linha
-    
-
-    echo "<p><strong>Nascimento.:</strong> {$dataFormatada} | <strong>Fone:</strong> {$infoCadastro['telefone']} | <strong>Inst:</strong> {$infoCadastro['instituicao']}";
-
-    if ($infoCadastro['formado']) {
-        echo " | <strong>Formado:</strong> Sim | <strong>Conclusão:</strong> {$infoCadastro['periodo']} | <strong>Especialidade:</strong> {$infoCadastro['especialidade']}</p>";
-    } else {
-        echo " | <strong>Formado:</strong> Não | <strong>Período:</strong> {$infoCadastro['periodo']}</p>";
-    }
-}
-
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    $cadastroSelecionado = null;
+    if (!isset($_GET['idcadastro']) && !empty($cadastros)) {
+        $cadastroSelecionado = $cadastros[0]['idcadastro'];
+    }
     // Consulta para obter os cadastros
     $consulta = $pdo->query("SELECT idcadastro, email, nascimento, telefone, instituicao, formado, periodo, especialidade, aceite FROM cadastro");
     $cadastros = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -74,20 +60,6 @@ try {
     echo "</form>";
     echo "<div id='infoCadastro'></div>";
 
-    // Páginas navegáveis
-    $paginas = array('pagina1', 'pagina2', 'pagina3', 'pagina4');
-    // Exibe o link das páginas no cabeçalho
-            echo "<div>";
-            foreach ($paginas as $pagina) {
-            $idcadastro = isset($_GET['idcadastro']) ? $_GET['idcadastro'] : ''; // Verifica se idcadastro está definido
-            echo "<a href='?pagina=$pagina'>$pagina</a> "; // Usando $idcadastro
-        }
-        echo "</div>";
-
-    // Verifica se uma página específica foi solicitada
-    if (isset($_GET['pagina']) && in_array($_GET['pagina'], $paginas)) {
-        $paginaAtual = $_GET['pagina'];
-
         // Obtém o ID do cadastro selecionado (se existir)
         $cadastroSelecionado = null;
         if (isset($_GET['idcadastro'])) {
@@ -101,37 +73,21 @@ try {
             $consultaCadastro = $pdo->prepare("SELECT * FROM cadastro WHERE idcadastro = ?");
             $consultaCadastro->execute([$cadastroSelecionado]);
             $infoCadastroSelecionado = $consultaCadastro->fetch(PDO::FETCH_ASSOC);
-
         }
-
-        // Inclui o conteúdo da página selecionada
-        include($paginaAtual . '.php');
-    } else {
-        // Exibe a primeira página por padrão
-        if ($cadastroSelecionado) {
-            // Consulta para obter informações do cadastro selecionado
-            $consultaCadastro = $pdo->prepare("SELECT * FROM cadastro WHERE idcadastro = ?");
-            $consultaCadastro->execute([$cadastroSelecionado]);
-            $infoCadastroSelecionado = $consultaCadastro->fetch(PDO::FETCH_ASSOC);
-
-            // Exibe o cabeçalho do cadastro
-            exibirCabecalhoCadastro($infoCadastroSelecionado);
-        }
-
-        include($paginas[0] . '.php');
-    }
-
-    // Exibe os links para as páginas
-    echo "<div>";
-    foreach ($paginas as $pagina) {
-        echo "<a href='?pagina=$pagina&idcadastro={$_GET['idcadastro']}'>$pagina</a> ";
-    }
-    echo "</div>";
-
+     
 } catch (PDOException $e) {
     echo "Erro ao obter os dados: " . $e->getMessage();
 }
 ?>
+<select id="selectPagina">
+    <option value="pagina1.php">Página 1</option>
+    <option value="pagina2.php">Página 2</option>
+    <option value="respostas_questionario.php">Página 3</option>
+    <option value="pagina4.php">Página 4</option>
+</select>
+<div id="pageContent">
+      <!-- O conteúdo da página será carregado aqui -->
+</div>
 <script>
 function carregarInfoCadastro(idcadastro) {
     // Realiza uma solicitação AJAX para obter informações adicionais do cadastro
@@ -154,13 +110,48 @@ function carregarInfoCadastro(idcadastro) {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 // Quando a resposta é recebida, armazena os dados no localStorage
-                localStorage.setItem('dadosCadastro' , this.responseText);
+                localStorage.setItem('respostasQuestionario' , this.responseText);
             }
         };
         // Define a URL da sua API ou script PHP que retorna os dados da consulta
         xhttp.open("GET", "get_dados_perguntas.php?idcadastro=" + idCadastro, true);
         xhttp.send();
     }
+        // Lê os dados do RespostaQuestionario e contabiliza quantas respostas de cada
+        var dadosLocalStorage = localStorage.getItem('respostasQuestionario');
+
+        // Envia os dados para o PHP via AJAX
+        var xhr = new XMLHttpRequest();
+        var url = 'receber_dados.php';
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Recebe a resposta do PHP
+                var resposta = JSON.parse(xhr.responseText);
+
+                // Seleciona a lista de pontuação
+                var listaPontuacao = document.getElementById('pontuacao-lista');
+
+                // Itera sobre as chaves e valores da resposta
+                for (var chave in resposta) {
+                    if (resposta.hasOwnProperty(chave)) {
+                        // Cria um item da lista para cada chave e valor
+                        var itemLista = document.createElement('li');
+                        itemLista.textContent = chave + ': ' + resposta[chave];
+                        // Adiciona o item à lista
+                        listaPontuacao.appendChild(itemLista);
+                    }
+                }
+
+                // Imprime a resposta do PHP no console
+                console.log('Resposta do PHP:', resposta);
+            }
+        };
+        xhr.send(dadosLocalStorage);
+
+
+
 
     // Chama a função para buscar os dados do servidor quando o documento estiver pronto
     document.addEventListener("DOMContentLoaded", function() {
@@ -173,6 +164,61 @@ function carregarInfoCadastro(idcadastro) {
         var idCadastro = selectedOption.value.split(' - ')[0]; // Obter o idcadastro corretamente
         buscarDadosDoServidor(idCadastro); // Chama a função para buscar os dados do servidor
         });
+    });
+    // Função para carregar o conteúdo da página selecionada via AJAX
+    function carregarPagina(pagina) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                document.getElementById("pageContent").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", pagina , true);
+        xhttp.send();
+    }
+
+    // Função para carregar as informações do cadastro
+    function carregarInfoCadastro(idcadastro) {
+        // Realiza uma solicitação AJAX para obter informações adicionais do cadastro
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                //exibe as info no div
+                document.getElementById("infoCadastro").innerHTML = this.responseText;
+                // Salva as informações do cadastro no localStorage
+                localStorage.setItem('infoCadastro', this.responseText);
+            }
+        };
+        xhttp.open("GET", "get_info_cadastro.php?idcadastro=" + idcadastro, true);
+        xhttp.send();
+    }
+
+    // Função para carregar a página selecionada e as informações do cadastro
+    function carregarPaginaSelecionada() {
+        var selectPagina = document.getElementById('selectPagina');
+        var selectedOption = selectPagina.value;
+        carregarPagina(selectedOption);
+
+        // Obtém o ID do cadastro selecionado no dropdown
+        var idcadastro = document.getElementById('cadastro').value.split(' - ')[0];
+        carregarInfoCadastro(idcadastro);
+    }
+
+    // Chama a função para carregar a página selecionada quando o documento estiver pronto
+    document.addEventListener("DOMContentLoaded", function() {
+        carregarPaginaSelecionada();
+    });
+
+    // Define um evento onchange para o select de páginas
+    var selectPagina = document.getElementById('selectPagina');
+    selectPagina.addEventListener('change', carregarPaginaSelecionada);
+
+    // Define um evento onchange para o dropdown de cadastros
+    var selectCadastro = document.getElementById('cadastro');
+    selectCadastro.addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var idCadastro = selectedOption.value.split(' - ')[0];
+        carregarInfoCadastro(idCadastro);
     });
 </script>
 

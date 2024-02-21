@@ -6,7 +6,7 @@
     <title>Receber Dados do PHP</title>
 </head>
 <body>
-    <h1>Pontuação das Variáveis</h1>
+    <h1>Resumo do questionário</h1>
     <ul id="pontuacao-lista">
         <!-- Aqui serão inseridos os itens da lista de pontuação -->
     </ul>
@@ -45,5 +45,6 @@
         };
         xhr.send(dadosLocalStorage);
     </script>
+    
 </body>
 </html>
