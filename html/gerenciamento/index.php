@@ -93,61 +93,68 @@ try {
     }
 </script>
 <script>
-    function buscarDadosDoServidor(idCadastro) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                localStorage.setItem('dadosPerguntas' , this.responseText);
+function buscarDadosDoServidor(idCadastro) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            localStorage.setItem('dadosPerguntas', this.responseText);
 
-                // Envia os dados para o PHP via AJAX
-                var xhr = new XMLHttpRequest();
-                var url = 'receber_dados.php';
-                xhr.open('POST', url, true);
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        // Recebe a resposta do PHP
-                        var resposta = JSON.parse(xhr.responseText);
+            // Envia os dados para o PHP via AJAX
+            var xhr = new XMLHttpRequest();
+            var url = 'receber_dados.php';
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Recebe a resposta do PHP
+                    var resposta = JSON.parse(xhr.responseText);
 
-                        // Seleciona o elemento onde os dados serão exibidos
-                        var listaDados = document.getElementById('dadosRecebidos');
+                    // Seleciona o elemento onde os dados serão exibidos
+                    var listaDados = document.getElementById('dadosRecebidos');
 
-                        // Limpa o conteúdo existente
-                        listaDados.innerHTML = '';
+                    // Limpa o conteúdo existente
+                    listaDados.innerHTML = '';
 
-                        // Itera sobre as chaves do objeto resposta
-                        for (var chave in resposta) {
-                            if (resposta.hasOwnProperty(chave)) {
-                                // Cria um item da lista para cada chave
-                                var itemLista = document.createElement('li');
-                                // Cria um elemento para exibir o valor da chave
-                                var textoChave = document.createTextNode(chave + ': ' + JSON.stringify(resposta[chave]));
-                                // Adiciona o texto ao item da lista
-                                itemLista.appendChild(textoChave);
-                                // Adiciona o item à lista
-                                listaDados.appendChild(itemLista);
-                            }
+                    // Itera sobre as chaves do objeto resposta
+                    for (var variavel in resposta) {
+                        if (resposta.hasOwnProperty(variavel)) {
+                            // Formata a saída para cada variável
+                            var pontuacao = resposta[variavel].pontuacao;
+                            var totalQuestoes = resposta[variavel].total_questoes;
+                            var percentual = resposta[variavel].percentual.toFixed(1) + '%';
+
+                            // Cria um item da lista para cada variável
+                            var itemLista = document.createElement('li');
+
+                            // Adiciona a descrição formatada ao item da lista
+                            var descricao = document.createTextNode(variavel + ': ' + pontuacao + '/' + totalQuestoes + ', ' + percentual);
+                            itemLista.appendChild(descricao);
+
+                            // Adiciona o item à lista
+                            listaDados.appendChild(itemLista);
                         }
-
-                        // Imprime a resposta do PHP no console
-                        console.log('Resposta do PHP:', resposta);
                     }
-                };
-                xhr.send(localStorage.getItem('dadosPerguntas'));
-            }
-        };
-        xhttp.open("GET", "get_dados_perguntas.php?idcadastro=" + idCadastro, true);
-        xhttp.send();
-    }
 
-    document.addEventListener("DOMContentLoaded", function() {
-        var selectCadastro = document.getElementById('cadastro');
-        selectCadastro.addEventListener('change', function() {
-            var selectedOption = this.options[this.selectedIndex];
-            var idCadastro = selectedOption.value.split(' - ')[0];
-            buscarDadosDoServidor(idCadastro);
-        });
+                    // Imprime a resposta do PHP no console
+                    console.log('Resposta do PHP:', resposta);
+                }
+            };
+            xhr.send(localStorage.getItem('dadosPerguntas'));
+        }
+    };
+    xhttp.open("GET", "get_dados_perguntas.php?idcadastro=" + idCadastro, true);
+    xhttp.send();
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    var selectCadastro = document.getElementById('cadastro');
+    selectCadastro.addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var idCadastro = selectedOption.value.split(' - ')[0];
+        buscarDadosDoServidor(idCadastro);
     });
+});
+
 </script>
 
 </body>
