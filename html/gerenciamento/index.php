@@ -115,25 +115,7 @@ function buscarDadosDoServidor(idCadastro) {
                     // Limpa o conteúdo existente
                     listaDados.innerHTML = '';
 
-                    // Itera sobre as chaves do objeto resposta
-                    for (var variavel in resposta) {
-                        if (resposta.hasOwnProperty(variavel)) {
-                            // Formata a saída para cada variável
-                            var pontuacao = resposta[variavel].pontuacao;
-                            var totalQuestoes = resposta[variavel].total_questoes;
-                            var percentual = resposta[variavel].percentual.toFixed(1) + '%';
-
-                            // Cria um item da lista para cada variável
-                            var itemLista = document.createElement('li');
-
-                            // Adiciona a descrição formatada ao item da lista
-                            var descricao = document.createTextNode(variavel + ': ' + pontuacao + '/' + totalQuestoes + ', ' + percentual);
-                            itemLista.appendChild(descricao);
-
-                            // Adiciona o item à lista
-                            listaDados.appendChild(itemLista);
-                        }
-                    }
+ 
 
                     // Imprime a resposta do PHP no console
                     console.log('Resposta do PHP:', resposta);
