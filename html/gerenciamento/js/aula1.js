@@ -1,50 +1,38 @@
+// comentario em linha
 
-/* Arquivo JS aula 04 Array */
+/*
+Comentario em bloco
+*/
 
-let produtos = ['Arroz', 'Feijão', 'Leite']
-var codigos = Array(10, 20, 30)
-var test =  Array(10)
-test[0] = "Oi"
-test[9] = "Tudo bem?"
-test[10] = "Opa!"
-let meses = ['Jan', 'Fev', 'Mar', 'Abr']
-meses[0] = 'Janeiro'
+// criar variaveis use let ou var
+let produto = 'Arroz'
+let quant = 2
+let precoUnitario = 4.99
+let precoTotal = quant * precoUnitario
+document.write(`Preço Total R$ ${Intl.NumberFormat('pt-BR').format(precoTotal)} <br>`)
+console.log(new Intl.NumberFormat('pt-BR').format(precoTotal))
 
-// ADICIONAR no final push = empurre
-produtos.push('Açúcar', 'Trigo')
-codigos.push(40, 50, 60, 70)
-meses.push('Mai', 'Jun', 'Ago', '07')
+document.write(`Preço Total ${precoTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} <hr>`)
 
-// REMOVER do final pop = estourar
-produtos.pop()
-codigos.pop()
-meses.pop()
-meses.pop()
+// criar constante
+const nome = 'Edson Maia'
+const peso = 83.5
+const altura = 1.75
+const imc = peso / (altura * altura)
 
-// ADICIONAR no inicio unshift
-produtos.unshift('Uva', 'Maçã')
+document.write(`IMC: ${imc} <br>`)
+document.write(`IMC: ${imc.toFixed(2)} <br>`)
 
-// REMOVER do inicio shift
-produtos.shift()
+let nota1 = 7.5
+let nota2 = 5.5
+let nota3 = 4.0
+let notaFinal = nota1 + nota2 + nota3
+document.write("Nota Final " + notaFinal+ '<br>')
 
-// REMOVER de uma posicao especifica splice
-// splice = emendar
-// posicao inicial, quantos remover
-codigos.splice(1, 3)
+let compra = 1999.99
+let desconto = 145.42
+let compraComDesconto = compra - desconto
 
-// COPIAR array slice = fatiar porção
-// posicao inicial, quantos copiar
-let meses1 = meses.slice()
-let meses2 = meses.slice(0,3)
+document.write(compraComDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })+ '<br>')
 
-// VER TAMANHO DO ARRAY length comprimento
-// meses.length
-// meses1.length
-// meses2.lenght
-
-// spreed operator ... copiar
-let teste = [...produtos, 'Ovo', 'Pera']
-
-// ver indice de um valor no array
-// let pos = nome_array.indexOf('Valor')
-let pos = produtos.indexOf('Uva')
+document.write(compraComDesconto + '<br>')
