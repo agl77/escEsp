@@ -85,13 +85,29 @@
             const answerValue = radio.value;
             pageAnswers[questionId] = answerValue;
           }
-        });<?php
-// Recebendo os dados das respostas do localStorage em formato JSON
-$respostas_json = isset($_GET["dadosCadastro"]) ? $_GET["dadosCadastro"] : "[]";
+        });
 
-// Decodificando os dados JSON em um array associativo
-$respostas = json_decode($respostas_json, true);
-?>
+
+        answers[pageIndex] = pageAnswers;
+        localStorage.setItem("answers", JSON.stringify(answers));
+      }
+
+      function fillAnswers(pageIndex) {
+        const pageAnswers = answers[pageIndex];
+
+        if (pageAnswers) {
+          Object.keys(pageAnswers).forEach((questionId) => {
+            const answerValue = pageAnswers[questionId];
+            const radio = document.querySelector(`input[name="${questionId}"][value="${answerValue}"]`);
+            if (radio) {
+              radio.checked = true;
+            }
+          });
+        }
+      }
+
+      function submitForm() {
+        saveAnswers(pages.length - 1);
 
         // Combine todas as respostas em um único objeto
         const allAnswers = {};

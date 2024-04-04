@@ -35,7 +35,7 @@ include ('db_conf.php');
    echo '<script>
    document.addEventListener("DOMContentLoaded", function() {
       localStorage.setItem("idcadastro", ' . $idcadastro . ');
-      window.location.href = "esp.php";
+      window.location.href = "esp.html";
    });
    </script>';
 
