@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrastar e soltar</title>
+<style>
+    .container {
+        display: flex;
+    }
+
+    .column {
+        flex: 1;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 5px;
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .item {
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 5px 0;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div id="coluna1" class="column" ondrop="drop(event, 'coluna1')" ondragover="allowDrop(event)">
+                    <div id="Acupuntura" class="item" draggable="true" ondragstart="drag(event)">Acupuntura</div>
+            <div id="Alergia e Imunologia" class="item" draggable="true" ondragstart="drag(event)">Alergia e Imunologia</div>
+            <div id="Anestesiologia" class="item" draggable="true" ondragstart="drag(event)">Anestesiologia</div>
+            <div id="Angiologia" class="item" draggable="true" ondragstart="drag(event)">Angiologia</div>
+            <div id="Cardiologia" class="item" draggable="true" ondragstart="drag(event)">Cardiologia</div>
+            <div id="Cirurgia Cardíaca" class="item" draggable="true" ondragstart="drag(event)">Cirurgia Cardíaca</div>
+            <div id="Cirurgia da Mão" class="item" draggable="true" ondragstart="drag(event)">Cirurgia da Mão</div>
+            <div id="Cirurgia de Cabeça e Pescoço" class="item" draggable="true" ondragstart="drag(event)">Cirurgia de Cabeça e Pescoço</div>
+            <div id="Cirurgia do Aparelho Digestivo" class="item" draggable="true" ondragstart="drag(event)">Cirurgia do Aparelho Digestivo</div>
+            <div id="Cirurgia Geral" class="item" draggable="true" ondragstart="drag(event)">Cirurgia Geral</div>
+            <div id="Cirurgia Oncológica" class="item" draggable="true" ondragstart="drag(event)">Cirurgia Oncológica</div>
+            <div id="Cirurgia Pediátrica" class="item" draggable="true" ondragstart="drag(event)">Cirurgia Pediátrica</div>
+            <div id="Cirurgia Plástica" class="item" draggable="true" ondragstart="drag(event)">Cirurgia Plástica</div>
+            <div id="Cirurgia Torácica" class="item" draggable="true" ondragstart="drag(event)">Cirurgia Torácica</div>
+            <div id="Cirurgia Vascular" class="item" draggable="true" ondragstart="drag(event)">Cirurgia Vascular</div>
+            <div id="Clínica Médica" class="item" draggable="true" ondragstart="drag(event)">Clínica Médica</div>
+            <div id="Coloproctologia" class="item" draggable="true" ondragstart="drag(event)">Coloproctologia</div>
+            <div id="Dermatologia" class="item" draggable="true" ondragstart="drag(event)">Dermatologia</div>
+            <div id="Endocrinologia" class="item" draggable="true" ondragstart="drag(event)">Endocrinologia</div>
+            <div id="Endoscopia" class="item" draggable="true" ondragstart="drag(event)">Endoscopia</div>
+            <div id="Fisiatria e Reabilitação" class="item" draggable="true" ondragstart="drag(event)">Fisiatria e Reabilitação</div>
+            <div id="Gastroenterologia" class="item" draggable="true" ondragstart="drag(event)">Gastroenterologia</div>
+            <div id="Genética" class="item" draggable="true" ondragstart="drag(event)">Genética</div>
+            <div id="Geriatria" class="item" draggable="true" ondragstart="drag(event)">Geriatria</div>
+            <div id="Ginecologia e Obstetrícia" class="item" draggable="true" ondragstart="drag(event)">Ginecologia e Obstetrícia</div>
+            <div id="Hematologia" class="item" draggable="true" ondragstart="drag(event)">Hematologia</div>
+            <div id="Homeopatia" class="item" draggable="true" ondragstart="drag(event)">Homeopatia</div>
+            <div id="Infectologia" class="item" draggable="true" ondragstart="drag(event)">Infectologia</div>
+            <div id="Medicina da Família e Comunidade" class="item" draggable="true" ondragstart="drag(event)">Medicina da Família e Comunidade</div>
+            <div id="Medicina de Emergência" class="item" draggable="true" ondragstart="drag(event)">Medicina de Emergência</div>
+            <div id="Medicina do Trabalho" class="item" draggable="true" ondragstart="drag(event)">Medicina do Trabalho</div>
+            <div id="Medicina do Tráfego" class="item" draggable="true" ondragstart="drag(event)">Medicina do Tráfego</div>
+            <div id="Medicina Esportiva" class="item" draggable="true" ondragstart="drag(event)">Medicina Esportiva</div>
+            <div id="Medicina Intensiva" class="item" draggable="true" ondragstart="drag(event)">Medicina Intensiva</div>
+            <div id="Medicina Legal e Perícia" class="item" draggable="true" ondragstart="drag(event)">Medicina Legal e Perícia</div>
+            <div id="Medicina Nuclear" class="item" draggable="true" ondragstart="drag(event)">Medicina Nuclear</div>
+            <div id="Medicina Preventiva" class="item" draggable="true" ondragstart="drag(event)">Medicina Preventiva</div>
+            <div id="Nefrologia" class="item" draggable="true" ondragstart="drag(event)">Nefrologia</div>
+            <div id="Neurocirurgia" class="item" draggable="true" ondragstart="drag(event)">Neurocirurgia</div>
+            <div id="Neurologia" class="item" draggable="true" ondragstart="drag(event)">Neurologia</div>
+            <div id="Nutrologia" class="item" draggable="true" ondragstart="drag(event)">Nutrologia</div>
+            <div id="Oftalmologia" class="item" draggable="true" ondragstart="drag(event)">Oftalmologia</div>
+            <div id="Oncologia Clínica" class="item" draggable="true" ondragstart="drag(event)">Oncologia Clínica</div>
+            <div id="Ortopedia" class="item" draggable="true" ondragstart="drag(event)">Ortopedia</div>
+            <div id="Otorrinolaringologia" class="item" draggable="true" ondragstart="drag(event)">Otorrinolaringologia</div>
+            <div id="Patologia Clínica" class="item" draggable="true" ondragstart="drag(event)">Patologia Clínica</div>
+            <div id="Patologia" class="item" draggable="true" ondragstart="drag(event)">Patologia</div>
+            <div id="Pediatria" class="item" draggable="true" ondragstart="drag(event)">Pediatria</div>
+            <div id="Pneumologia" class="item" draggable="true" ondragstart="drag(event)">Pneumologia</div>
+            <div id="Psiquiatria" class="item" draggable="true" ondragstart="drag(event)">Psiquiatria</div>
+            <div id="Radiologia e Imagem" class="item" draggable="true" ondragstart="drag(event)">Radiologia e Imagem</div>
+            <div id="Radioterapia" class="item" draggable="true" ondragstart="drag(event)">Radioterapia</div>
+            <div id="Reumatologia" class="item" draggable="true" ondragstart="drag(event)">Reumatologia</div>
+            <div id="Urologia" class="item" draggable="true" ondragstart="drag(event)">Urologia</div>
+    </div>
+    <div id="coluna2" class="column" ondrop="drop(event, 'coluna2')" ondragover="allowDrop(event)"></div>
+    <div id="coluna3" class="column" ondrop="drop(event, 'coluna3')" ondragover="allowDrop(event)"></div>
+</div>
+
+<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev, targetColumn) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        var item = document.getElementById(data);
+        var column = document.getElementById(targetColumn);
+        
+        // Teste de limite apenas para a primeira coluna
+        if ((targetColumn === "coluna2" || targetColumn==="coluna3") && column.childElementCount >= 5) {
+            alert("Limite de itens atingido na coluna 1!");
+            return;
+        }
+        
+        // Verifica se o item já está em outra coluna
+        if (item.parentNode != column) {
+            column.appendChild(item);
+        }
+    }
+</script>
+
+</body>
+</html>

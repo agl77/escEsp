@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classificação de Especialidades Médicas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Classificação de Especialidades Médicas</h1>
+
+  <div id="itens">
+    <!-- Lista de itens -->
+    <div class="item">
+      <span class="item-name">Alergia e Imunologia</span>
+      <div class="rating">
+        <div class="like-ratings">
+          <button onclick="rateItem(this, 'like', 1)">1</button>
+          <button onclick="rateItem(this, 'like', 2)">2</button>
+          <button onclick="rateItem(this, 'like', 3)">3</button>
+          <button onclick="rateItem(this, 'like', 4)">4</button>
+          <button onclick="rateItem(this, 'like', 5)">5</button>
+        </div>
+        <div class="dislike-ratings">
+          <button onclick="rateItem(this, 'dislike', 1)">1</button>
+          <button onclick="rateItem(this, 'dislike', 2)">2</button>
+          <button onclick="rateItem(this, 'dislike', 3)">3</button>
+          <button onclick="rateItem(this, 'dislike', 4)">4</button>
+          <button onclick="rateItem(this, 'dislike', 5)">5</button>
+        </div>
+      </div>
+    </div>
+    <!-- Adicione mais itens conforme necessário -->
+    <div class="item">
+      
+      <div class="rating">
+        <div class="like-ratings">
+          <button onclick="rateItem(this, 'like', 1)">1</button>
+          <button onclick="rateItem(this, 'like', 2)">2</button>
+          <button onclick="rateItem(this, 'like', 3)">3</button>
+          <button onclick="rateItem(this, 'like', 4)">4</button>
+          <button onclick="rateItem(this, 'like', 5)">5</button>
+        </div>
+        <span class="item-name">Anestesiologia</span>
+        <div class="dislike-ratings">
+          <button onclick="rateItem(this, 'dislike', 1)">1</button>
+          <button onclick="rateItem(this, 'dislike', 2)">2</button>
+          <button onclick="rateItem(this, 'dislike', 3)">3</button>
+          <button onclick="rateItem(this, 'dislike', 4)">4</button>
+          <button onclick="rateItem(this, 'dislike', 5)">5</button>
+        </div>
+      </div>
+    </div>
+    <!-- Repita este bloco para cada especialidade médica -->
+  </div>
+
+  <h2>Especialidades Mais Gostadas</h2>
+  <ol id="top-likes"></ol>
+
+  <h2>Especialidades Menos Gostadas</h2>
+  <ol id="top-dislikes"></ol>
+
+  <script src="script.js"></script>
+</body>
+</html>
