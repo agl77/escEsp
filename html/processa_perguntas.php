@@ -56,7 +56,7 @@ try {
         $insertStmt->execute($insertValues);
     }
 
-    header("Location: range.html");
+    header("Location: valores.html");
 } catch (PDOException $e) {
     echo "Erro ao inserir/atualizar os dados: " . $e->getMessage();
 }

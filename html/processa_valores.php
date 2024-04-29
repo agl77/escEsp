@@ -12,8 +12,8 @@ try {
     $selectedValues = $_POST['values'];
 
     // Converte os arrays para strings sem quebras de linha e espaços adicionais
-    $liked = str_replace(["\n", "\r", "  "], "", implode(', ', json_decode($_POST['liked'])));
-    $disliked = str_replace(["\n", "\r", "  "], "", implode(', ', json_decode($_POST['disliked'])));
+    //$liked = str_replace(["\n", "\r", "  "], "", implode(', ', json_decode($_POST['liked'])));
+    //$disliked = str_replace(["\n", "\r", "  "], "", implode(', ', json_decode($_POST['disliked'])));
 
     // Consulta para verificar se já existe uma linha com o mesmo idcadastro
     $checkQuery = "SELECT idespvalor FROM esp_valor WHERE idcadastro = ?";
@@ -23,18 +23,20 @@ try {
 
     if ($existingRow) {
         // Já existe uma linha, então atualiza os valores
-        $updateQuery = "UPDATE esp_valor SET liked = ?, disliked = ?, selectedValues = ? WHERE idcadastro = ?";
+        //$updateQuery = "UPDATE esp_valor SET liked = ?, disliked = ?, selectedValues = ? WHERE idcadastro = ?";
+        $updateQuery = "UPDATE esp_valor SET selectedValues = ? WHERE idcadastro = ?";
         $updateStatement = $pdo->prepare($updateQuery);
-        $updateStatement->execute([$liked, $disliked, implode(', ', $selectedValues), $idcadastro]);
+        //$updateStatement->execute([$liked, $disliked, implode(', ', $selectedValues), $idcadastro]);
+        $updateStatement->execute([ implode(', ', $selectedValues), $idcadastro]);
     } else {
         // Não existe uma linha, então insere os valores
-        $insertQuery = "INSERT INTO esp_valor (idcadastro, liked, disliked, selectedValues) VALUES (?, ?, ?, ?)";
+        $insertQuery = "INSERT INTO esp_valor (idcadastro, selectedValues) VALUES (?, ?)";
         $insertStatement = $pdo->prepare($insertQuery);
-        $insertStatement->execute([$idcadastro, $liked, $disliked, implode(', ', $selectedValues)]);
+        $insertStatement->execute([$idcadastro, implode(', ', $selectedValues)]);
     }
 
     // Redireciona para a próxima página
-    header("Location: perguntas.html");
+    header("Location: esp.php");
 
 } catch (PDOException $e) {
     echo "Erro ao inserir/atualizar os dados: " . $e->getMessage();

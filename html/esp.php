@@ -72,76 +72,81 @@
     
 
     <div class="container">
-        <div class="especialidades lista-principal" columnId="original">
-            <h2>Especialidades</h2>
-            <div class="original" draggable="true" columnId="original">Acupuntura</div>
-            <div class="original" draggable="true" columnId="original">Alergia e Imunologia</div>
-            <div class="original" draggable="true" columnId="original">Anestesiologia</div>
-            <div class="original" draggable="true" columnId="original">Angiologia</div>
-            <div class="original" draggable="true" columnId="original">Cardiologia</div>
-            <div class="original" draggable="true" columnId="original">Cirurgia Cardíaca</div>
-            <div class="original" draggable="true" columnId="original">Cirurgia da Mão</div>
-            <div class="original" draggable="true" columnId="original">Cirurgia de Cabeça e Pescoço</div>
-            <div class="original" draggable="true" columnId="original">Cirurgia do Aparelho Digestivo</div>
-            <div class="original" draggable="true" columnId="original">Cirurgia Geral</div>
-            <div class="original" draggable="true" columnId="original">Cirurgia Oncológica</div>
-            <div class="original" draggable="true" columnId="original">Cirurgia Pediátrica</div>
-            <div class="original" draggable="true" columnId="original">Cirurgia Plástica</div>
-            <div class="original" draggable="true" columnId="original">Cirurgia Torácica</div>
-            <div class="original" draggable="true" columnId="original">Cirurgia Vascular</div>
-            <div class="original" draggable="true" columnId="original">Clínica Médica</div>
-            <div class="original" draggable="true" columnId="original">Coloproctologia</div>
-            <div class="original" draggable="true" columnId="original">Dermatologia</div>
-            <div class="original" draggable="true" columnId="original">Endocrinologia</div>
-            <div class="original" draggable="true" columnId="original">Endoscopia</div>
-            <div class="original" draggable="true" columnId="original">Fisiatria e Reabilitação</div>
-            <div class="original" draggable="true" columnId="original">Gastroenterologia</div>
-            <div class="original" draggable="true" columnId="original">Genética</div>
-            <div class="original" draggable="true" columnId="original">Geriatria</div>
-            <div class="original" draggable="true" columnId="original">Ginecologia e Obstetrícia</div>
-            <div class="original" draggable="true" columnId="original">Hematologia</div>
-            <div class="original" draggable="true" columnId="original">Homeopatia</div>
-            <div class="original" draggable="true" columnId="original">Infectologia</div>
-            <div class="original" draggable="true" columnId="original">Medicina da Família e Comunidade</div>
-            <div class="original" draggable="true" columnId="original">Medicina de Emergência</div>
-            <div class="original" draggable="true" columnId="original">Medicina do Trabalho</div>
-            <div class="original" draggable="true" columnId="original">Medicina do Tráfego</div>
-            <div class="original" draggable="true" columnId="original">Medicina Esportiva</div>
-            <div class="original" draggable="true" columnId="original">Medicina Intensiva</div>
-            <div class="original" draggable="true" columnId="original">Medicina Legal e Perícia</div>
-            <div class="original" draggable="true" columnId="original">Medicina Nuclear</div>
-            <div class="original" draggable="true" columnId="original">Medicina Preventiva</div>
-            <div class="original" draggable="true" columnId="original">Nefrologia</div>
-            <div class="original" draggable="true" columnId="original">Neurocirurgia</div>
-            <div class="original" draggable="true" columnId="original">Neurologia</div>
-            <div class="original" draggable="true" columnId="original">Nutrologia</div>
-            <div class="original" draggable="true" columnId="original">Oftalmologia</div>
-            <div class="original" draggable="true" columnId="original">Oncologia Clínica</div>
-            <div class="original" draggable="true" columnId="original">Ortopedia</div>
-            <div class="original" draggable="true" columnId="original">Otorrinolaringologia</div>
-            <div class="original" draggable="true" columnId="original">Patologia Clínica</div>
-            <div class="original" draggable="true" columnId="original">Patologia</div>
-            <div class="original" draggable="true" columnId="original">Pediatria</div>
-            <div class="original" draggable="true" columnId="original">Pneumologia</div>
-            <div class="original" draggable="true" columnId="original">Psiquiatria</div>
-            <div class="original" draggable="true" columnId="original">Radiologia e Imagem</div>
-            <div class="original" draggable="true" columnId="original">Radioterapia</div>
-            <div class="original" draggable="true" columnId="original">Reumatologia</div>
-            <div class="original" draggable="true" columnId="original">Urologia</div>
-
+        <div class="col-6">
+            <div class="especialidades lista-principal" columnId="original">
+                <h2>Especialidades</h2>
+                <div class="original" draggable="true" columnId="original">Acupuntura</div>
+                <div class="original" draggable="true" columnId="original">Alergia e Imunologia</div>
+                <div class="original" draggable="true" columnId="original">Anestesiologia</div>
+                <div class="original" draggable="true" columnId="original">Angiologia</div>
+                <div class="original" draggable="true" columnId="original">Cardiologia</div>
+                <div class="original" draggable="true" columnId="original">Cirurgia Cardíaca</div>
+                <div class="original" draggable="true" columnId="original">Cirurgia da Mão</div>
+                <div class="original" draggable="true" columnId="original">Cirurgia de Cabeça e Pescoço</div>
+                <div class="original" draggable="true" columnId="original">Cirurgia do Aparelho Digestivo</div>
+                <div class="original" draggable="true" columnId="original">Cirurgia Geral</div>
+                <div class="original" draggable="true" columnId="original">Cirurgia Oncológica</div>
+                <div class="original" draggable="true" columnId="original">Cirurgia Pediátrica</div>
+                <div class="original" draggable="true" columnId="original">Cirurgia Plástica</div>
+                <div class="original" draggable="true" columnId="original">Cirurgia Torácica</div>
+                <div class="original" draggable="true" columnId="original">Cirurgia Vascular</div>
+                <div class="original" draggable="true" columnId="original">Clínica Médica</div>
+                <div class="original" draggable="true" columnId="original">Coloproctologia</div>
+                <div class="original" draggable="true" columnId="original">Dermatologia</div>
+                <div class="original" draggable="true" columnId="original">Endocrinologia</div>
+                <div class="original" draggable="true" columnId="original">Endoscopia</div>
+                <div class="original" draggable="true" columnId="original">Fisiatria e Reabilitação</div>
+                <div class="original" draggable="true" columnId="original">Gastroenterologia</div>
+                <div class="original" draggable="true" columnId="original">Genética</div>
+                <div class="original" draggable="true" columnId="original">Geriatria</div>
+                <div class="original" draggable="true" columnId="original">Ginecologia e Obstetrícia</div>
+                <div class="original" draggable="true" columnId="original">Hematologia</div>
+                <div class="original" draggable="true" columnId="original">Homeopatia</div>
+                <div class="original" draggable="true" columnId="original">Infectologia</div>
+                <div class="original" draggable="true" columnId="original">Medicina da Família e Comunidade</div>
+                <div class="original" draggable="true" columnId="original">Medicina de Emergência</div>
+                <div class="original" draggable="true" columnId="original">Medicina do Trabalho</div>
+                <div class="original" draggable="true" columnId="original">Medicina do Tráfego</div>
+                <div class="original" draggable="true" columnId="original">Medicina Esportiva</div>
+                <div class="original" draggable="true" columnId="original">Medicina Intensiva</div>
+                <div class="original" draggable="true" columnId="original">Medicina Legal e Perícia</div>
+                <div class="original" draggable="true" columnId="original">Medicina Nuclear</div>
+                <div class="original" draggable="true" columnId="original">Medicina Preventiva</div>
+                <div class="original" draggable="true" columnId="original">Nefrologia</div>
+                <div class="original" draggable="true" columnId="original">Neurocirurgia</div>
+                <div class="original" draggable="true" columnId="original">Neurologia</div>
+                <div class="original" draggable="true" columnId="original">Nutrologia</div>
+                <div class="original" draggable="true" columnId="original">Oftalmologia</div>
+                <div class="original" draggable="true" columnId="original">Oncologia Clínica</div>
+                <div class="original" draggable="true" columnId="original">Ortopedia</div>
+                <div class="original" draggable="true" columnId="original">Otorrinolaringologia</div>
+                <div class="original" draggable="true" columnId="original">Patologia Clínica</div>
+                <div class="original" draggable="true" columnId="original">Patologia</div>
+                <div class="original" draggable="true" columnId="original">Pediatria</div>
+                <div class="original" draggable="true" columnId="original">Pneumologia</div>
+                <div class="original" draggable="true" columnId="original">Psiquiatria</div>
+                <div class="original" draggable="true" columnId="original">Radiologia e Imagem</div>
+                <div class="original" draggable="true" columnId="original">Radioterapia</div>
+                <div class="original" draggable="true" columnId="original">Reumatologia</div>
+                <div class="original" draggable="true" columnId="original">Urologia</div>
+            </div>
         </div>
 
-        <div class="especialidades mais-identifica" columnId="liked">
-            <h2>Mais se Identifica</h2>
+        <div class="col-3">
+            <div class="especialidades mais-identifica" columnId="liked">
+                <h2>Mais se Identifica</h2>
+            </div>
         </div>
-
-        <div class="especialidades menos-identifica" columnId="disliked">
-            <h2>Menos se Identifica</h2>
+        <div class="col-3">
+            <div class="especialidades menos-identifica" columnId="disliked">
+                <h2>Menos se Identifica</h2>
+            </div>
         </div>
     </div>
-
+  <script id="DragDropTouch" src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js"></script>
     <script>
-        
+        //recupera do localstorage
+        const idcadastro = localStorage.getItem('idcadastro');
         function getListFrom(list) {
             return document.querySelectorAll("." + list)
         }
@@ -233,7 +238,7 @@
 
         document.getElementById("enviarEspecialidades").onclick = function () {
             saveAnswers();
-            location.href = "valores.html";
+            location.href = "processa_esp.php";
         };
 
 
