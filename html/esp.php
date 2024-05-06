@@ -67,8 +67,12 @@
 </head>
 <body>
     <h1>Escolha de Especialidades</h1>
-    <p> Arraste da coluna da esquerda para a coluna do meio, de maneira que fiquem ordenadas as 5 especialidades que mais se identifica e para a coluna da direita as 5 que menos se identifica.</p>
-    <button id="enviarEspecialidades" disabled>Próxima página</button>
+    <p> Arraste por ordem de prioridade as cinco especialidades com as quais você mais se identifica da coluna da esquerda para a coluna do meio e as cinco com as quais você menos se identifica para a coluna da direita</p>
+    <p style="font-family: Arial, sans-serif; font-size: 14px; color: red;">
+    Caso o dispositivo que você está usando para responder a este questionário não permitir essa ação, por favor, envie as respostas para o email <a href="mailto:cestaro.f@gmail.com" style="color: blue; text-decoration: none;">cestaro.f@gmail.com</a>.
+    </p>
+    <form action="processa_esp.php" method="post">
+    <button id="enviarEspecialidades" disabled>Finalizar Questionário</button>
     
 
     <div class="container">
@@ -143,7 +147,10 @@
             </div>
         </div>
     </div>
-  <script id="DragDropTouch" src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js"></script>
+    <input type="hidden" name="idcadastro" id="idcadastro" value="">
+    <input type="hidden" name="liked" id="liked" value="">
+    <input type="hidden" name="disliked" id="disliked" value="">
+    </form>
     <script>
         //recupera do localstorage
         const idcadastro = localStorage.getItem('idcadastro');
@@ -255,6 +262,9 @@
         function saveAnswers() {
             const likedEspecialidades = getListFrom('liked');
             const dislikedEspecialidades = getListFrom('disliked');
+            const idcadastro = localStorage.getItem('idcadastro');
+            document.getElementById('idcadastro').value = idcadastro;
+            
 
             const answers = {
                 liked: [],
@@ -273,6 +283,18 @@
 
             // Salve as respostas no localStorage
             localStorage.setItem('especialidades', JSON.stringify(answers));
+            // envie o post para o php
+            // Obtenha os valores da chave 'especialidades' do localStorage
+            const especialidadesData = JSON.parse(localStorage.getItem('especialidades')) || { liked: [], disliked: [] };
+
+            // Divida as strings em arrays
+            const liked = especialidadesData.liked.map(item => item.trim()).filter(item => item !== '');
+            const disliked = especialidadesData.disliked.map(item => item.trim()).filter(item => item !== '');
+
+            document.getElementById('liked').value = JSON.stringify(liked);
+            document.getElementById('disliked').value = JSON.stringify(disliked);
+
+
             }
 
 
