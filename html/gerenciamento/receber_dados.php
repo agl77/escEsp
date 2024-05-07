@@ -176,6 +176,8 @@ foreach ($pontuacoes as $variavel => $dados) {
 
 // Retorna a pontuação como JSON
 
-$resposta_json = json_encode($percentuais, JSON_UNESCAPED_UNICODE);
-error_log(var_export($percentuais, true)); // Convertendo o array em uma string e registrando como log
+$resposta_json = json_encode($pontuacoes, JSON_UNESCAPED_UNICODE);
+error_log(var_export($resposta_json, true)); // Convertendo o array em uma string e registrando como log
+echo "<script>localStorage.setItem('respostasPontuacao', '" . htmlentities($resposta_json, ENT_QUOTES, 'UTF-8') . "');</script>";
 echo $resposta_json;
+?>
