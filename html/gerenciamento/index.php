@@ -27,8 +27,29 @@ $_SESSION['ultima_atividade'] = $tempoAtual;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apresentação das respostas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+    table {
+        border-collapse: collapse;
+        width: 500px;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 2px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
 </head>
 <body>
+    <script src="js/busca_dados.js" ></script>
 <?php
 include('../db_conf.php');
 
@@ -78,66 +99,28 @@ try {
     <ul id="dadosRecebidos"></ul>
 
 </div>
-
-<script>
-    function carregarInfoCadastro(idcadastro) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("infoCadastro").innerHTML = this.responseText;
-                localStorage.setItem('dadosCadastro' , this.responseText);
-            }
-        };
-        xhttp.open("GET", "get_info_cadastro.php?idcadastro=" + idcadastro, true);
-        xhttp.send();
-    }
-</script>
-<script>
-function buscarDadosDoServidor(idCadastro) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            localStorage.setItem('dadosPerguntas', this.responseText);
-
-            // Envia os dados para o PHP via AJAX
-            var xhr = new XMLHttpRequest();
-            var url = 'receber_dados.php';
-            xhr.open('POST', url, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Recebe a resposta do PHP
-                    var resposta = JSON.parse(xhr.responseText);
-
-                    // Seleciona o elemento onde os dados serão exibidos
-                    var listaDados = document.getElementById('dadosRecebidos');
-
-                    // Limpa o conteúdo existente
-                    listaDados.innerHTML = '';
-
- 
-
-                    // Imprime a resposta do PHP no console
-                    console.log('Resposta do PHP:', resposta);
-                }
-            };
-            xhr.send(localStorage.getItem('dadosPerguntas'));
-        }
-    };
-    xhttp.open("GET", "get_dados_perguntas.php?idcadastro=" + idCadastro, true);
-    xhttp.send();
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    var selectCadastro = document.getElementById('cadastro');
-    selectCadastro.addEventListener('change', function() {
-        var selectedOption = this.options[this.selectedIndex];
-        var idCadastro = selectedOption.value.split(' - ')[0];
-        buscarDadosDoServidor(idCadastro);
-    });
-});
-
-</script>
+<section id="resultados-especialidades">
+    <h6>Resultados das especialidades e escolha de valores</h6>
+    <table width="1200">
+        <tr>
+            <th>Itens</th>
+            <th>Escolhas</th>
+        </tr>
+        <tr>
+            <td>Mais se identifica</td>
+            <td id="mais-se-identifica"></td>
+        </tr>
+        <tr>
+            <td>Menos se identifica</td>
+            <td id="menos-se-identifica"></td>
+        </tr>
+        <tr>
+            <td>Valores Selecionados</td>
+            <td id="valores-selecionados"></td>
+        </tr>
+      
+    </table>
+</section>
 
 </body>
 </html>

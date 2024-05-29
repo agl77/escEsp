@@ -1,5 +1,5 @@
 <?php
-// Busca os dados das perguntas para inserir no localstorage pelo
+// Busca os dados das perguntas para inserir no localstorage pelo js
 include('../db_conf.php');
 
 if (isset($_GET['idcadastro'])) {
@@ -9,16 +9,8 @@ if (isset($_GET['idcadastro'])) {
         $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Lista de perguntas que deseja selecionar
-        $perguntas = array();
-        for ($i = 1; $i <= 111; $i++) {
-            $pergunta = "pergunta" . str_pad($i, 3, '0', STR_PAD_LEFT);
-            $perguntas[] = $pergunta;
-        }
-        $perguntas_sql = implode(', ', $perguntas);
-
         // Consulta para obter as informações do cadastro específico
-        $consulta = $pdo->prepare("SELECT $perguntas_sql FROM question WHERE idcadastro = ?");
+        $consulta = $pdo->prepare("SELECT liked, disliked, selectedValues FROM esp_valor WHERE idcadastro = ?");
         $consulta->execute([$idcadastro]);
         $infoCadastro = $consulta->fetch(PDO::FETCH_ASSOC);
 

@@ -27,8 +27,29 @@ $_SESSION['ultima_atividade'] = $tempoAtual;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apresentação das respostas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+    table {
+        border-collapse: collapse;
+        width: 500px;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 2px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+</style>
 </head>
 <body>
+    <script src="js/busca_dados.js" ></script>
 <?php
 include('../db_conf.php');
 
@@ -79,7 +100,7 @@ try {
 
 </div>
 
-<script> src="js/busca_dados.js" </script>
+
 
 </body>
 </html>

@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = $_POST["senha"];
 
     // Substitua pela lógica de autenticação adequada
-    if ($login == "usuario" && $senha == "senha") {
+    if ($login == "andrelauer" && $senha == "lauer1977") {
         // Define a variável de sessão para indicar que o usuário está autenticado
         $_SESSION['usuario_autenticado'] = true;
         $_SESSION['ultima_atividade'] = time();
