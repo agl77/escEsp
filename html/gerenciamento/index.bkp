@@ -99,32 +99,28 @@ try {
     <ul id="dadosRecebidos"></ul>
 
 </div>
-<section id="resultados-personalidade">
-    <h6>Resultados da personalidade</h6>
+<section id="leitura-personalidade">
+    <h6>Leitura das personalidades Extroversão(E) Introversão(I) Intuição(In) Sensação(Ss) Pensamento(Ps) Sentimento(St) </h6>
     <table width="1200">
         <tr>
-            <th>R1</th>
-            <th>R2</th>
-            <th>R3</th>
+            <th>Itens</th>
+            <th>Escolhas</th>
         </tr>
         <tr>
-            <td id="R1"></td>
-            <td id="R2"></td>
+            <td>R1</td>
             <td id="R3"></td>
         </tr>
-    </table>
-    
-    <table>
         <tr>
-            <th>Personalidade:</th>
-            <th id="personalidade"></th>
+            <td>R2</td>
+            <td id="R2"></td>
         </tr>
+        <tr>
+            <td>R3</td>
+            <td id="R3"></td>
+        </tr>
+      
     </table>
 </section>
-
-</body>
-</html>
-
 
 <section id="resultados-especialidades">
     <h6>Resultados das especialidades e escolha de valores</h6>

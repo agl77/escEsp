@@ -1,0 +1,163 @@
+ACUPUNTURA
+    • Personalidades: I St In; I St Ss; I In St
+    • Interesses profissionais: Saúde, Comportamental/Educacional, Manual/Artístico, Simbólico/Linguístico
+ALERGO-IMUNOLOGIA
+    • Personalidades: I St In; I Ss Ps; I In St; I In Ps; E St Ss; E Ps Ss
+    • Interesses Profissionais: Saúde, Comportamental/Educacional, Cálculo/Finanças, Organizacional/Administrativo
+ANESTESIOLOGIA
+    • Personalidades: I Ss Ps; I Ps Ss; I Ps In
+    • Interesses Profissionais: Saúde, Cálculo/Finanças, Organizacional/Administrativo, Comportamental/Educacional
+ANGIOLOGIA
+    • Personalidades: I Ss Ps; I In Ps; E Ss Ps; E Ss St; E In Ps
+    • Interesses Profissionais: Saúde, Cálculo/Finanças, Manual/Artístico, Comportamental/Educacional
+CARDIOLOGIA
+    • Personalidades: I Ss Ps; I Ps Ss; I In Ps; E Ss Ps; E Ss St; E Ps In; E In Ps
+    • Interesses Profissionais: Saúde, Cálculo/Finanças, Manual/Artístico, Comportamental/Educacional
+CIRURGIA CARDIOVASCULAR
+    • Personalidades: I Ss Ps; I Ps Ss; I In Ps; I Ps In
+    • Interesses Profissionais: Saúde, Manual/Artístico, Cálculo/Finanças, Organizacional/Administrativo, Comportamental/Educacional
+CIRURGIA DE MÃO
+    • Personalidades: I Ps Ss; I In Ps; I Ps In
+    • Interesses Profissionais: Saúde, Manual/Artístico, Cálculo/Finanças, Comportamental/Educacional
+CIRURGIA DE  CABEÇA E PESCOÇO
+    • Personalidades: I Ss Ps; I In Ps; I Ps In; E In Ps
+    • Interesses Profissionais: Saúde, Manual/Artístico, Cálculo/Finanças, Comportamental/Educacional
+CIRURGIA DO APARELHO DIGESTIVO
+    • Personalidades: I Ss Ps; E Ss Ps; E Ss St; E Ps Ss
+    • Interesses Profissionais: Saúde, Manual/Artístico, Cálculo/Finanças, Comportamental/Educacional
+CIRURGIA GERAL
+    • Personalidades: I In Ps; E Ss Ps; E Ss St; E In St; E Ps Ss
+    • Interesses Profissionais: Saúde, Manual/Artístico, Cálculo/Finanças, Comportamental/Educacional
+CIRURGIA ONCOLÓGICA
+    • Personalidades: I Ss Ps; I In Ps; I Ps In; E Ps In; E In Ps; E Ps Ss
+    • Interesses Profissionais: Saúde, Manual/Artístico, Cálculo/Finanças, Comportamental/Educacional
+CIRURGIA PEDIÁTRICA
+    • Personalidades: E Ss Ps; E St Ss; E Ss St; E St In; E In St
+    • Interesses Profissionais: Saúde, Manual/Artístico, Comportamental/Educacional, Cálculo/Finanças
+CIRURGIA PLÁSTICA
+    • Personalidades: I In Ps; E Ss Ps; E Ps In; E In Ps
+    • Interesses Profissionais: Saúde, Manual/Artístico, Comportamental/Educacional, Cálculo/Finanças
+CIRURGIA TORÁCICA
+    • Personalidades: I Ss St; I Ss Ps; I In Ps; E In Ps
+    • Interesses Profissionais: Saúde, Manual/Artístico, Cálculo/Finanças, Comportamental/Educacional
+CIRURGIA VASCULAR
+    • Personalidades: E Ss Ps; E Ps In; E In Ps; E Ps Ss
+    • Interesses Profissionais: Saúde, Manual/Artístico, Cálculo/Finanças, Comportamental/Educacional
+CLÍNICA MÉDICA
+    • Personalidades: I St In; I St Ss; I Ps Ss; I In St; E St Ss; E St In; E Ps In
+    • Interesses Profissionais: Saúde, Comportamental/Educacional, Cálculo/Finanças, Jurídico/Social
+COLOPROCTOLOGIA
+    • Personalidades: I Ss Ps; I In Ps; E Ss Ps; E Ps Ss
+    • Interesses Profissionais: Saúde, Manual/Artístico, Cálculo/Finanças, Comportamental/Educacional
+DERMATOLOGIA
+    • Personalidades: I Ss St; I St Ss; I In St; I Ps In; E St In; E Ps Ss
+    • Interesses Profissionais: Saúde, Manual/Artístico, Comportamental/Educacional, Cálculo/Finanças
+ENDOCRINOLOGIA E METABOLOGIA
+    • Personalidades: I Ss St; I Ps Ss; I Ps In; E St Ss; E St In
+    • Interesses Profissionais: Saúde, Cálculo/Finanças, Comportamental/Educacional, Organizacional/Administrativo
+ENDOSCOPIA
+    • Personalidades: I Ps Ss; I In St; I In Ps; I Ps In
+    • Interesses Profissionais: Saúde, Manual/Artístico, Cálculo/Finanças, Comportamental/Educacional
+GASTROENTEROLOGIA
+    • Personalidades: I St Ss; I Ps Ss; I In Ps; E Ss Ps; E St Ss; E Ss St; E Ps In; E Ps Ss
+    • Interesses Profissionais: Saúde, Cálculo/Finanças, Comportamental/Educacional, Manual/Artístico
+GENÉTICA MÉDICA
+    • Personalidades: I Ss St; I St In; I St Ss; I In St; I In Ps; I Ps In
+    • Interesses Profissionais: Saúde, Cálculo/Finanças, Comportamental/Educacional, Simbólico/Linguístico
+GERIATRIA
+    • Personalidades: E St Ss; E Ss St; E St In; E In St
+    • Interesses Profissionais: Saúde, Comportamental/Educacional, Organizacional/Administrativo, Comunicação/Persuasão
+GINECOLOGIA E OBSTETRÍCIA
+    • Personalidades: E St Ss; E Ss St; E St In; E In St
+    • Interesses Profissionais: Saúde, Manual/Artístico, Comportamental/Educacional, Comunicação/Persuasão
+HEMATOLOGIA E HEMOTERAPIA
+    • Personalidades: I Ss St; I Ss Ps; I Ps Ss; I Ps In
+    • Interesses Profissionais: Saúde, Cálculo/Finanças, Comportamental/Educacional, Comunicação/Persuasão
+HOMEOPATIA
+    • Personalidades: I St In; I St Ss; I In St
+    • Interesses Profissionais: Saúde, Comportamental/Educacional, Comunicação/Persuasão, Simbólico/Linguístico
+INFECTOLOGIA
+    • Personalidades: I Ss Ps; I Ps Ss; I Ps In; E St Ss; E Ps In
+    • Interesses Profissionais: Saúde, Cálculo/Finanças, Comportamental/Educacional, Comunicação/Persuasão
+MASTOLOGIA
+    • Personalidades: I Ss St; I Ss Ps; I Ps Ss; I Ps In; E St Ss; E St In
+    • Interesses Profissionais: Saúde, Manual/Artístico, Comportamental/Educacional, Comunicação/Persuasão
+MEDICINA DE EMERGÊNCIA
+    • Personalidades: E Ss Ps; E Ps In; E In Ps; E Ps Ss
+    • Interesses Profissionais: Saúde, Cálculo/Finanças, Comportamental/Educacional, Comunicação/Persuasão
+MEDICINA DE FAMÍLIA E COMUNIDADE
+    • Personalidades: I St In; I St Ss; I In St; E St Ss; E Ss St; E St In
+    • Interesses Profissionais: Saúde, Comportamental/Educacional, Comunicação/Persuasão, Jurídico/Social
+MEDICINA DO TRABALHO
+    • Personalidades: I Ss Ps; E Ps In; E In Ps; E Ps Ss
+    • Interesses Profissionais: Saúde, Organizacional/Administrativo, Comportamental/Educacional, Jurídico/Social
+MEDICINA DO TRÁFEGO
+    • Personalidades: E Ss Ps; E Ps In; E Ps Ss
+    • Interesses Profissionais: Saúde, Organizacional/Administrativo, Comportamental/Educacional, Jurídico/Social
+MEDICINA ESPORTIVA
+    • Personalidades: E Ss PS; E Ps In; E Ps Ss
+    • Interesses Profissionais: Saúde, Físico/Químico, Comportamental/Educacional, Comunicação/Persuasão
+MEDICINA FÍSICA E DE REABILITAÇÃO
+    • Personalidades: I St In; I St Ss; I In St; E St Ss; E St In
+    • Interesses Profissionais: Saúde, Comportamental/Educacional, Físico/Químico, Comunicação/Persuasão
+MEDICINA INTENSIVA
+    • Personalidades: I In Ps; E Ss Ps; E Ps In; E In Ps; E Ps Ss
+    • Interesses Profissionais: Saúde, Organizacional/Administrativo, Comportamental/Educacional, Comunicação/Persuasão
+MEDICINA LEGAL E PERÍCIA
+    • Personalidades: I Ss Ps; I Ps Ss; I In Ps; I Ps In
+    • Interesses Profissionais: Saúde,  Jurídico/Social, Comportamental/Educacional, Comunicação/Persuasão
+MEDICINA NUCLEAR
+    • Personalidades: I Ss Ps; I Ps In; E Ps In; E In Ps
+    • Interesses Profissionais:  Saúde, Físico/Químico, Comunicação/Persuasão, Organizacional/Administrativo
+MEDICINA PREVENTIVA E SOCIAL
+    • Personalidades: I St In; I St Ss; I In St; E St In; E In St; E Ps Ss
+    • Interesses Profissionais: Saúde, jurídico – social, Comportamental/Educacional, Organizacional/Administrativo
+NEFROLOGIA
+    • Personalidades: I Ss Ps; I Ps Ss; I Ps In; E Ps In; E Ps Ss
+    • Interesses Profissionais: Saúde, Físico/Químico, Comunicação/Persuasão, Comportamental/Educacional
+NEUROCIRURGIA
+    • Personalidades: E Ps In; E In Ps; E Ps Ss
+    • Interesses Profissionais: Saúde, Físico/Químico, Manual/Artístico, Comunicação/Persuasão
+NEUROLOGIA
+    • Personalidades:
+    • Interesses Profissionais: Saúde, Físico/Químico, Comportamental/Educacional, Comunicação/Persuasão
+NUTROLOGIA
+    • Personalidades: I Ss Ps; I Ps Ss; I In Ps; I Ps In; E Ps In; E Ps Ss
+    • Interesses Profissionais: Saúde, Físico/Químico, Comportamental/Educacional, Comunicação/Persuasão
+OFTALMOLOGIA
+    • Personalidades: I Ps Ss; I Ps In; E Ps In; E Ps Ss
+    • Interesses Profissionais: Saúde, Físico/Químico, Manual/Artístico, Comunicação/Persuasão
+ONCOLOGIA CLÍNICA
+    • Personalidades: E St In; E Ps In; E In St
+    • Interesses Profissionais: Saúde, Físico/Químico, Comportamental/Educacional, Comunicação/Persuasão
+ORTOPEDIA
+    • Personalidades: E Ss Ps; E Ps In; E Ps Ss
+    • Interesses Profissionais: Saúde, Físico/Químico, Manual/Artístico, Comportamental/Educacional, Comunicação/Persuasão
+OTORRINOLARINGOLOGIA
+    • Personalidades: E Ss Ps; E Ps In; E In Ps; E Ps Ss
+    • Interesses Profissionais: Saúde, Físico/Químico, Manual/Artístico, Comportamental/Educacional, Comunicação/Persuasão
+PATOLOGIA/ PATOLOGIA CLÍNICA E MEDICINA LABORATORIAL
+    • Personalidades: I Ss Ps; I Ps Ss; I In Ps; I Ps In
+    • Interesses Profissionais: Saúde, Físico/Químico, Cálculo/Finanças, Comportamental/Educacional, Comunicação/Persuasão
+PEDIATRIA
+    • Personalidades: E St Ss; E Ss St; E St In; E In St
+    • Interesses Profissionais: Saúde, Comportamental/Educacional, Comunicação/Persuasão, Manual/Artístico, Organizacional/Administrativo
+PNEUMOLOGIA
+    • Personalidades: I Ss Ps, I Ps Ss, I In Ps, I Ps In, E Ss Ps, E Ps In, E In  Ps, E Ps Ss
+    • Interesses Profissionais: Saúde, Físico/Químico, Comportamental/Educacional, Comunicação/Persuasão, Cálculo/Finanças
+PSIQUIATRIA
+    • Personalidades: I Ss St; I St In; I St Ss; I In  St; E St Ss; E St In
+    • Interesses Profissionais: Saúde, Comportamental/Educacional, Comunicação/Persuasão, Simbólico/Linguístico, Organizacional/Administrativo
+RADIOLOGIA E DIAGNÓSTICO POR IMAGEM
+    • Personalidades: I Ss Ps; I Ps Ss; I In Ps; I Ps In
+    • Interesses Profissionais: Saúde, Físico/Químico, Cálculo/Finanças, Comunicação/Persuasão, Organizacional/Administrativo
+RADIOTERAPIA
+    • Personalidades: E Ss Ps; E Ps In; E In Ps; E Ps Ss
+    • Interesses Profissionais: Saúde, Físico/Químico, Cálculo/Finanças, Comunicação/Persuasão, Organizacional/Administrativo
+REUMATOLOGIA
+    • Personalidades: I Ss Ps; I Ps Ss; I In Ps; I Ps In
+    • Interesses Profissionais: Saúde, Comportamental/Educacional, Comunicação/Persuasão, Organizacional/Administrativo
+UROLOGIA
+    • Personalidades: E Ss Ps; E Ps In; E In Ps; E Ps Ss
+    • Interesses Profissionais: Saúde, Físico/Químico, Manual/Artístico, Comunicação/Persuasão
+

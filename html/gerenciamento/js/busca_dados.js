@@ -1,10 +1,25 @@
+document.addEventListener("DOMContentLoaded", function() {
+    var selectCadastro = document.getElementById('cadastro');
+    selectCadastro.addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var idCadastro = selectedOption.value.split(' - ')[0];
+        
+        // Chama as funções para buscar dados do servidor
+        buscarDadosDoServidor(idCadastro);
+        buscarDadosEspecializacao(idCadastro);
+
+        // Atualiza os resultados de personalidade após um pequeno delay
+        setTimeout(atualizarResultadosPersonalidade, 500);
+    });
+});
+
 //carrega as informações do cadastro selecionado no dropdown
 function carregarInfoCadastro(idcadastro) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById("infoCadastro").innerHTML = this.responseText;
-            localStorage.setItem('dadosCadastro' , this.responseText);
+            localStorage.setItem('dadosCadastro', this.responseText);
         }
     };
     xhttp.open("GET", "get_info_cadastro.php?idcadastro=" + idcadastro, true);
@@ -37,12 +52,11 @@ function buscarDadosDoServidor(idCadastro) {
             };
             xhr.send(localStorage.getItem('dadosPerguntas'));
         }
-    
     };
     xhttp.open("GET", "get_dados_perguntas.php?idcadastro=" + idCadastro, true);
     xhttp.send();
-    
 }
+
 // Função para exibir as respostas na página
 function exibirRespostas(respostas) {
     var tabelaDados = document.getElementById('dadosRecebidos');
@@ -105,11 +119,6 @@ function buscarDadosEspecializacao(idCadastro) {
         document.getElementById('mais-se-identifica').innerHTML = JSON.stringify(likedData);
         document.getElementById('menos-se-identifica').innerHTML = JSON.stringify(dislikedData);
         document.getElementById('valores-selecionados').innerHTML = JSON.stringify(selectedValuesData);
-
-      // Perform any necessary actions after storing data
-  
-        // Perform any necessary actions after storing data
-        console.log('Dados armazenados com sucesso!');
       } else {
         console.error(`Erro ao obter dados: ${xhr.statusText}`);
       }
@@ -119,18 +128,19 @@ function buscarDadosEspecializacao(idCadastro) {
     xhr.send();
   }
 
-function atualizarResultadosPersonalidade(dados) {
+function atualizarResultadosPersonalidade() {
     const respostasLocalStorage = JSON.parse(localStorage.getItem("respostas"));
     let resultadoR1 = "";
     let resultadoR2 = "";
     let resultadoR3 = "";
     let valorR2 = 0;
     let valorR3 = 0;
+    let funcaoPersonalidade = "";
     
-    if (respostasLocalStorage["Introversão"].percentual >= respostasLocalStorage["Entroversão"].percentual) {
+    if (respostasLocalStorage["Introversão"].percentual >= respostasLocalStorage["Extroversão"].percentual) {
         resultadoR1 = "I";
     } else { resultadoR1 = "E"; }
-    if ( respostasLocalStorage["Intuição"].percentual >= respostasLocalStorage["Sensação"].percentual){
+    if (respostasLocalStorage["Intuição"].percentual >= respostasLocalStorage["Sensação"].percentual){
         resultadoR2 = "In";
         valorR2 = respostasLocalStorage["Intuição"].percentual;
     } else { resultadoR2 = "Ss"; 
@@ -143,19 +153,22 @@ function atualizarResultadosPersonalidade(dados) {
         valorR3 = respostasLocalStorage["Sentimento"].percentual;
     }
 // Monta a função principal e Auxiliar para apresentar na pagina
+    if (valorR2 >= valorR3){
+        funcaoPersonalidade = resultadoR1 + " " + resultadoR2 + " " + resultadoR3;
+    } else {
+        funcaoPersonalidade = resultadoR1 + " " + resultadoR3 + " " + resultadoR2;
+    }
 
     document.getElementById("R1").textContent = resultadoR1;
     document.getElementById("R2").textContent = resultadoR2;
     document.getElementById("R3").textContent = resultadoR3;
+    document.getElementById("personalidade").textContent = funcaoPersonalidade;
+    // Grava os valores no localStorage
+    let personalidade = {
+        R1: resultadoR1,
+        R2: resultadoR2,
+        R3: resultadoR3,
+        funcao: funcaoPersonalidade
+    };
+    localStorage.setItem("personalidade", JSON.stringify(personalidade));
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-var selectCadastro = document.getElementById('cadastro');
-selectCadastro.addEventListener('change', function() {
-    var selectedOption = this.options[this.selectedIndex];
-    var idCadastro = selectedOption.value.split(' - ')[0];
-    buscarDadosDoServidor(idCadastro);
-    buscarDadosEspecializacao(idCadastro);
-    
-});
-});
