@@ -99,6 +99,32 @@ try {
     <ul id="dadosRecebidos"></ul>
 
 </div>
+<section id="resultados-personalidade">
+    <h6>Resultados da personalidade</h6>
+    <table width="1200">
+        <tr>
+            <th>R1</th>
+            <th>R2</th>
+            <th>R3</th>
+        </tr>
+        <tr>
+            <td id="R1">I</td>
+            <td id="R2">In</td>
+            <td id="R3">Ps</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <th>Personalidade:</th>
+            <th id="personalidade"></th>
+        </tr>
+    </table>
+</section>
+
+</body>
+</html>
+
+
 <section id="resultados-especialidades">
     <h6>Resultados das especialidades e escolha de valores</h6>
     <table width="1200">

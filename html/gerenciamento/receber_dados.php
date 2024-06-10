@@ -140,8 +140,7 @@ $pontuacao_respostas = [
     "pergunta111" => ["A" => "Organizacional/Administrativo", "B" => "Simbólico/Linguístico"],
   ];
 
-// Processa os dados e calcula a pontuação para cada variável
-foreach ($dadosLocalStorage as $pergunta => $resposta) {
+  foreach ($dadosLocalStorage as $pergunta => $resposta) {
     // Verifica se a pergunta não está vazia e se existe nas respostas disponíveis
     if (!empty($pergunta) && array_key_exists($pergunta, $pontuacao_respostas)) {
         // Obtém as respostas possíveis para a pergunta
@@ -160,24 +159,38 @@ foreach ($dadosLocalStorage as $pergunta => $resposta) {
                 $pontuacao = $respostas_possiveis[$resposta];
                 $pontuacoes[$pontuacao]["pontuacao"]++;
             }
-        } else {
-            // Trate aqui o caso em que a resposta não está definida nas respostas possíveis
         }
     }
 }
+
 // Calcular os percentuais para cada variável
-$percentuais = [];
 foreach ($pontuacoes as $variavel => $dados) {
     $percentual = round(($dados["pontuacao"] / $dados["total_questoes"]) * 100, 1);
     $pontuacoes[$variavel]["percentual"] = $percentual;
-    $percentuais[$variavel] = $percentual;
 }
 
+// Separar as variáveis de personalidade das outras variáveis
+$variaveis_personalidade = ["Extroversão", "Introversão", "Intuição", "Sensação", "Pensamento", "Sentimento"];
+$pontuacoes_personalidade = [];
+$pontuacoes_outros = [];
+
+foreach ($pontuacoes as $variavel => $dados) {
+    if (in_array($variavel, $variaveis_personalidade)) {
+        $pontuacoes_personalidade[$variavel] = $dados;
+    } else {
+        $pontuacoes_outros[$variavel] = $dados;
+    }
+}
+
+// Ordenar as variáveis de outros pelo percentual em ordem decrescente
+uasort($pontuacoes_outros, function($a, $b) {
+    return $b["percentual"] <=> $a["percentual"];
+});
+
+// Combinar as duas listas
+$pontuacoes_final = array_merge($pontuacoes_outros, $pontuacoes_personalidade);
 
 // Retorna a pontuação como JSON
-
-$resposta_json = json_encode($pontuacoes, JSON_UNESCAPED_UNICODE);
-//error_log(var_export($resposta_json, true)); // Convertendo o array em uma string e registrando como log
-//echo "<script>localStorage.setItem('respostasPontuacao', '" . htmlentities($resposta_json, ENT_QUOTES, 'UTF-8') . "');</script>";
+$resposta_json = json_encode($pontuacoes_final, JSON_UNESCAPED_UNICODE);
 echo $resposta_json;
 ?>
