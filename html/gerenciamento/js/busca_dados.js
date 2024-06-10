@@ -121,16 +121,32 @@ function buscarDadosEspecializacao(idCadastro) {
 
 function atualizarResultadosPersonalidade(dados) {
     const respostasLocalStorage = JSON.parse(localStorage.getItem("respostas"));
-    let resultadoIntroversaoExt = "";
-    let resultadoIntuicaoSenc = "";
-    let resultadoPensamentoSent = "";
-    resultadoIntroversaoExt = respostasLocalStorage["Introversão"].pontuacao / respostasLocalStorage["Entroversão"].pontuacao
-    resultadoIntuicaoSenc = respostasLocalStorage["Intuição"].pontuacao / respostasLocalStorage["Sensação"].pontuacao
-    resultadoPensamentoSent = respostasLocalStorage["Pensamento"].pontuacao / respostasLocalStorage["Sentimento"].pontuacao
+    let resultadoR1 = "";
+    let resultadoR2 = "";
+    let resultadoR3 = "";
+    let valorR2 = 0;
+    let valorR3 = 0;
+    
+    if (respostasLocalStorage["Introversão"].percentual >= respostasLocalStorage["Entroversão"].percentual) {
+        resultadoR1 = "I";
+    } else { resultadoR1 = "E"; }
+    if ( respostasLocalStorage["Intuição"].percentual >= respostasLocalStorage["Sensação"].percentual){
+        resultadoR2 = "In";
+        valorR2 = respostasLocalStorage["Intuição"].percentual;
+    } else { resultadoR2 = "Ss"; 
+        valorR2 = respostasLocalStorage["Sensação"].percentual;
+    }
+    if (respostasLocalStorage["Pensamento"].percentual >= respostasLocalStorage["Sentimento"].percentual){
+        resultadoR3 = "Ps";
+        valorR3 = respostasLocalStorage["Pensamento"].percentual;
+    }else{ resultadoR3 = "St"
+        valorR3 = respostasLocalStorage["Sentimento"].percentual;
+    }
+// Monta a função principal e Auxiliar para apresentar na pagina
 
-    document.getElementById("mais-se-identifica").textContent = resultadoIntroversaoExt;
-    document.getElementById("menos-se-identifica").textContent = resultadoIntuicaoSenc;
-    document.getElementById("valores-selecionados").textContent = resultadoPensamentoSent;
+    document.getElementById("R1").textContent = resultadoR1;
+    document.getElementById("R2").textContent = resultadoR2;
+    document.getElementById("R3").textContent = resultadoR3;
 }
 
 document.addEventListener("DOMContentLoaded", function() {
