@@ -7,13 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
         // Chama as funções para buscar dados do servidor
         buscarDadosDoServidor(idCadastro);
         buscarDadosEspecializacao(idCadastro);
-
-        // Atualiza os resultados de personalidade após um pequeno delay
-        setTimeout(atualizarResultadosPersonalidade, 500);
     });
 });
 
-//carrega as informações do cadastro selecionado no dropdown
+// Carrega as informações do cadastro selecionado no dropdown
 function carregarInfoCadastro(idcadastro) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -26,31 +23,39 @@ function carregarInfoCadastro(idcadastro) {
     xhttp.send();
 }
 
-// carrega do banco de dados as respostas do id do cadastro selecionado
+// Carrega do banco de dados as respostas do id do cadastro selecionado
 function buscarDadosDoServidor(idCadastro) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            localStorage.setItem('dadosPerguntas', this.responseText);
+            try {
+                var dadosPerguntas = JSON.parse(this.responseText);
+                localStorage.setItem('dadosPerguntas', JSON.stringify(dadosPerguntas));
 
-            // Envia os dados para o PHP via AJAX
-            var xhr = new XMLHttpRequest();
-            var url = 'receber_dados.php';
-            xhr.open('POST', url, true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Recebe a resposta do PHP
-                    var resposta = JSON.parse(xhr.responseText);
+                // Envia os dados para o PHP via AJAX
+                var xhr = new XMLHttpRequest();
+                var url = 'receber_dados.php';
+                xhr.open('POST', url, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        try {
+                            var resposta = JSON.parse(xhr.responseText);
 
-                    // Grava as respostas no localStorage
-                    localStorage.setItem('respostas', JSON.stringify(resposta));
+                            // Grava as respostas no localStorage
+                            localStorage.setItem('respostas', JSON.stringify(resposta));
 
-                    // Exibe as respostas recebidas
-                    exibirRespostas(resposta);
-                }
-            };
-            xhr.send(localStorage.getItem('dadosPerguntas'));
+                            // Exibe as respostas recebidas
+                            exibirRespostas(resposta);
+                        } catch (e) {
+                            console.error("Erro ao parsear a resposta JSON:", e, xhr.responseText);
+                        }
+                    }
+                };
+                xhr.send(JSON.stringify(dadosPerguntas));
+            } catch (e) {
+               // console.error("Erro ao parsear a resposta JSON:", e, this.responseText);
+            }
         }
     };
     xhttp.open("GET", "get_dados_perguntas.php?idcadastro=" + idCadastro, true);
@@ -93,40 +98,48 @@ function exibirRespostas(respostas) {
 
     // Adiciona a tabela ao elemento HTML
     tabelaDados.appendChild(tabela);
+    carregafuncoes();
 }
 
-//carrega os dados das especializações em uma página
+// Carrega os dados das especializações em uma página
 function buscarDadosEspecializacao(idCadastro) {
-    // Create an AJAX request
+    // Cria uma requisição AJAX
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `get_dados_especializacao.php?idcadastro=${idCadastro}`);
-  
-    // Handle response
+
+    // Trata a resposta
     xhr.onload = function() {
-      if (xhr.status === 200) {
-        const dados = JSON.parse(xhr.responseText);
-  
-        // Extract data
-        const likedData = dados.liked;
-        const dislikedData = dados.disliked;
-        const selectedValuesData = dados.selectedValues;
-  
-        // Store data in localStorage
-        localStorage.setItem('maisIdentifica', JSON.stringify(likedData));
-        localStorage.setItem('menosIdentifica', JSON.stringify(dislikedData));
-        localStorage.setItem('selecionaValores', JSON.stringify(selectedValuesData));
-        // Display data in table cells
-        document.getElementById('mais-se-identifica').innerHTML = JSON.stringify(likedData);
-        document.getElementById('menos-se-identifica').innerHTML = JSON.stringify(dislikedData);
-        document.getElementById('valores-selecionados').innerHTML = JSON.stringify(selectedValuesData);
-      } else {
-        console.error(`Erro ao obter dados: ${xhr.statusText}`);
-      }
+        if (xhr.status === 200) {
+            try {
+                const dados = JSON.parse(xhr.responseText);
+
+                // Extrai os dados
+                const likedData = dados.liked;
+                const dislikedData = dados.disliked;
+                const selectedValuesData = dados.selectedValues;
+
+                // Armazena os dados no localStorage
+                localStorage.setItem('maisIdentifica', JSON.stringify(likedData));
+                localStorage.setItem('menosIdentifica', JSON.stringify(dislikedData));
+                localStorage.setItem('selecionaValores', JSON.stringify(selectedValuesData));
+
+                // Exibe os dados nas células da tabela
+                document.getElementById('mais-se-identifica').innerHTML = JSON.stringify(likedData);
+                document.getElementById('menos-se-identifica').innerHTML = JSON.stringify(dislikedData);
+                document.getElementById('valores-selecionados').innerHTML = JSON.stringify(selectedValuesData);
+                
+            } catch (e) {
+                console.error("Erro ao parsear a resposta JSON:", e, xhr.responseText);
+            }
+        } else {
+            console.error(`Erro ao obter dados: ${xhr.statusText}`);
+        }
     };
-  
-    // Send the request
+
+    // Envia a requisição
     xhr.send();
-  }
+    
+}
 
 function atualizarResultadosPersonalidade() {
     const respostasLocalStorage = JSON.parse(localStorage.getItem("respostas"));
@@ -136,23 +149,30 @@ function atualizarResultadosPersonalidade() {
     let valorR2 = 0;
     let valorR3 = 0;
     let funcaoPersonalidade = "";
-    
+
     if (respostasLocalStorage["Introversão"].percentual >= respostasLocalStorage["Extroversão"].percentual) {
         resultadoR1 = "I";
-    } else { resultadoR1 = "E"; }
+    } else { 
+        resultadoR1 = "E"; 
+    }
+
     if (respostasLocalStorage["Intuição"].percentual >= respostasLocalStorage["Sensação"].percentual){
         resultadoR2 = "In";
         valorR2 = respostasLocalStorage["Intuição"].percentual;
-    } else { resultadoR2 = "Ss"; 
+    } else { 
+        resultadoR2 = "Ss"; 
         valorR2 = respostasLocalStorage["Sensação"].percentual;
     }
+
     if (respostasLocalStorage["Pensamento"].percentual >= respostasLocalStorage["Sentimento"].percentual){
         resultadoR3 = "Ps";
         valorR3 = respostasLocalStorage["Pensamento"].percentual;
-    }else{ resultadoR3 = "St"
+    } else { 
+        resultadoR3 = "St";  // Adicionado ponto e vírgula aqui
         valorR3 = respostasLocalStorage["Sentimento"].percentual;
     }
-// Monta a função principal e Auxiliar para apresentar na pagina
+
+    // Monta a função principal e Auxiliar para apresentar na pagina
     if (valorR2 >= valorR3){
         funcaoPersonalidade = resultadoR1 + " " + resultadoR2 + " " + resultadoR3;
     } else {
@@ -163,6 +183,7 @@ function atualizarResultadosPersonalidade() {
     document.getElementById("R2").textContent = resultadoR2;
     document.getElementById("R3").textContent = resultadoR3;
     document.getElementById("personalidade").textContent = funcaoPersonalidade;
+
     // Grava os valores no localStorage
     let personalidade = {
         R1: resultadoR1,
@@ -171,4 +192,41 @@ function atualizarResultadosPersonalidade() {
         funcao: funcaoPersonalidade
     };
     localStorage.setItem("personalidade", JSON.stringify(personalidade));
+}
+
+function buscarCaracteristicasPrevalentes() {
+    // Pega as respostas do localStorage e parseia para um objeto
+    const respostas = JSON.parse(localStorage.getItem('respostas'));
+
+    if (!respostas) {
+        console.error('Nenhum dado encontrado no localStorage com a chave "respostas".');
+        return;
+    }
+
+    // Características a serem desconsideradas
+    const ignorar = ["Extroversão", "Introversão", "Intuição", "Sensação", "Pensamento", "Sentimento", "Saúde"];
+
+    // Filtra e organiza as características válidas em ordem decrescente de percentual
+    const caracteristicasValidas = Object.keys(respostas)
+        .filter(key => !ignorar.includes(key))
+        .map(key => ({ caracteristica: key, percentual: respostas[key].percentual }))
+        .sort((a, b) => b.percentual - a.percentual);
+
+    // Seleciona as 5 características com os maiores percentuais
+    const caracteristicasPrevalentes = caracteristicasValidas.slice(0, 6).map(item => ({
+        caracteristica: item.caracteristica,
+        percentual: item.percentual
+    }));
+
+    // Armazena as características prevalentes no localStorage
+    localStorage.setItem('caracteristicasPrevalentes', JSON.stringify(caracteristicasPrevalentes));
+
+    console.log('Características prevalentes salvas no localStorage:', caracteristicasPrevalentes);
+}
+
+function carregafuncoes() {
+    // Atualiza os resultados de personalidade após um pequeno delay
+    atualizarResultadosPersonalidade();
+    buscarCaracteristicasPrevalentes();
+    processarEspecialidades();
 }

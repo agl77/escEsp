@@ -49,6 +49,7 @@ $_SESSION['ultima_atividade'] = $tempoAtual;
 </style>
 </head>
 <body>
+    <script src="js/processa_caracteristicas.js" ></script>
     <script src="js/busca_dados.js" ></script>
 <?php
 include('../db_conf.php');
@@ -113,7 +114,7 @@ try {
             <td id="R3"></td>
         </tr>
     </table>
-    
+
     <table>
         <tr>
             <th>Personalidade:</th>
