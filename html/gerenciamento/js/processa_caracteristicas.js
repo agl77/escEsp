@@ -1,61 +1,56 @@
 // Função para verificar se a personalidade corresponde à especialidade
 function verificarPersonalidadeEspecialidade(personalidadeString, especialidadePersonalidades) {
-    const personalidadeArray = personalidadeString.split(" ");
-    for (const personalidadeItem of personalidadeArray) {
-        if (especialidadePersonalidades.includes(personalidadeItem)) {
-            return true;
-        }
-    }
-    return false;
+    return especialidadePersonalidades.includes(personalidadeString);
 }
 
 // Função para verificar se os interesses profissionais correspondem
 function verificarInteressesProfissionais(interessesEspecialidade, caracteristicasPrevalentes) {
     let totalPontuacao = 0;
-
     caracteristicasPrevalentes.forEach(caracteristicaPrevalente => {
         if (interessesEspecialidade.includes(caracteristicaPrevalente.caracteristica)) {
             totalPontuacao += caracteristicaPrevalente.percentual;
         }
     });
-
-    return totalPontuacao >= 100; // Ajuste o valor conforme a necessidade para determinar a pontuação mínima
+    return totalPontuacao;
 }
 
+// Função principal para processar especialidades
 function processarEspecialidades() {
     const caracteristicasPrevalentes = JSON.parse(localStorage.getItem('caracteristicasPrevalentes'));
-    let personalidadeString = localStorage.getItem("personalidade"); // Get 'personalidade' as a string
+    const personalidade = JSON.parse(localStorage.getItem('personalidade'));
 
-    if (!caracteristicasPrevalentes) {
-        console.error("Dados de características prevalentes não presentes");
+    if (!caracteristicasPrevalentes || !personalidade || !personalidade.funcao) {
+        console.error("Dados de características prevalentes ou personalidade não encontrados.");
         return;
     }
 
-    if (!personalidadeString) {
-        console.error("Dados de personalidade não encontrados.");
-        return;
-    }
+    const especialidadesPontuadas = [];
+    const personalidadeFuncao = personalidade.funcao;
 
-    const especialidadesProvaveis = [];
-
-    for (const especialidade in dadosEspecialidades) {
-        const especialidadeDados = dadosEspecialidades[especialidade];
+    for (const especialidade in especialidades) {
+        const especialidadeDados = especialidades[especialidade];
         const especialidadePersonalidades = especialidadeDados["Personalidades"];
         const interessesProfissionais = especialidadeDados["Interesses Profissionais"];
-
-        const personalidadeMatch = verificarPersonalidadeEspecialidade(personalidadeString, especialidadePersonalidades);
-        const interessesMatch = verificarInteressesProfissionais(interessesProfissionais, caracteristicasPrevalentes);
-
-        if (personalidadeMatch && interessesMatch) {
-            especialidadesProvaveis.push(especialidade);
+        const personalidadeMatch = verificarPersonalidadeEspecialidade(personalidadeFuncao, especialidadePersonalidades);       
+        const totalPontuacaoInteresses = verificarInteressesProfissionais(interessesProfissionais, caracteristicasPrevalentes);
+        if (personalidadeMatch) {
+            especialidadesPontuadas.push({ especialidade, totalPontuacaoInteresses });
         }
     }
 
-    localStorage.setItem("especialidadesprovaveis", JSON.stringify(especialidadesProvaveis));
-    console.log("Especialidades prováveis:", especialidadesProvaveis);
+    // Ordenar as especialidades com base na pontuação e selecionar as 3 principais
+    especialidadesPontuadas.sort((a, b) => b.totalPontuacaoInteresses - a.totalPontuacaoInteresses);
+    console.log(especialidadesPontuadas);
+    const especialidadesProvaveis = especialidadesPontuadas.slice(0, 5).map(item => item.especialidade);
+
+
+    localStorage.setItem('especialidadescompativeis', JSON.stringify(especialidadesProvaveis));
+    //console.log("Especialidades Compatíveis:", especialidadesProvaveis);
+    document.getElementById("compatíveis").textContent = especialidadesProvaveis;
 }
+
   // Objeto contendo dados de cada especialidade (personalidades e interesses profissionais)
-  const dadosEspecialidades = {
+  const especialidades = {
       "ACUPUNTURA": {
         "Personalidades": ["I St In", "I St Ss", "I In St"],
         "Interesses Profissionais": ["Comportamental/Educacional", "Manual/Artístico", "Simbólico/Linguístico"]
@@ -70,7 +65,7 @@ function processarEspecialidades() {
       },
       "ANGIOLOGIA": {
         "Personalidades": ["I Ss Ps", "I In Ps", "E Ss Ps", "E Ss St", "E In Ps"],
-        "Interesses Profissionais": ["Cálculo/Finanças", "Manual/Artístico", "Comportamental/Educacional"]
+        "Interesses Profissionais": ["Cálculo/Finanças", "Manual/Artístico", "Comportamental/Educacional", "Físico/Matemático"]
       },
       "CARDIOLOGIA": {
         "Personalidades": ["I Ss Ps", "I Ps Ss", "I In Ps", "E Ss Ps", "E Ss St", "E Ps In", "E In Ps"],
@@ -78,7 +73,7 @@ function processarEspecialidades() {
       },
       "CIRURGIA CARDIOVASCULAR": {
         "Personalidades": ["I Ss Ps", "I Ps Ss", "I In Ps", "I Ps In"],
-        "Interesses Profissionais": ["Manual/Artístico", "Cálculo/Finanças", "Organizacional/Administrativo", "Comportamental/Educacional"]
+        "Interesses Profissionais": ["Manual/Artístico", "Cálculo/Finanças", "Organizacional/Administrativo", "Comportamental/Educacional", "Físico/Matemático"]
       },
       "CIRURGIA DE MÃO": {
         "Personalidades": ["I Ps Ss", "I In Ps", "I Ps In"],
@@ -98,7 +93,7 @@ function processarEspecialidades() {
       },
       "CIRURGIA ONCOLÓGICA": {
         "Personalidades": ["I Ss Ps", "I In Ps", "I Ps In", "E Ps In", "E In Ps", "E Ps Ss"],
-        "Interesses Profissionais": ["Manual/Artístico", "Cálculo/Finanças", "Comportamental/Educacional"]
+        "Interesses Profissionais": ["Manual/Artístico", "Cálculo/Finanças", "Comportamental/Educacional", "Físico/Matemático"]
       },
       "CIRURGIA PEDIÁTRICA": {
         "Personalidades": ["E Ss Ps", "E St Ss", "E Ss St", "E St In", "E In St"],
@@ -110,11 +105,11 @@ function processarEspecialidades() {
       },
       "CIRURGIA TORÁCICA": {
         "Personalidades": ["I Ss St", "I Ss Ps", "I In Ps", "E In Ps"],
-        "Interesses Profissionais": ["Manual/Artístico", "Cálculo/Finanças", "Comportamental/Educacional"]
+        "Interesses Profissionais": ["Manual/Artístico", "Cálculo/Finanças", "Comportamental/Educacional", "Físico/Matemático"]
       },
       "CIRURGIA VASCULAR": {
         "Personalidades": ["E Ss Ps", "E Ps In", "E In Ps", "E Ps Ss"],
-        "Interesses Profissionais": ["Manual/Artístico", "Cálculo/Finanças", "Comportamental/Educacional"]
+        "Interesses Profissionais": ["Manual/Artístico", "Cálculo/Finanças", "Comportamental/Educacional", "Físico/Matemático"]
       },
       "CLÍNICA MÉDICA": {
         "Personalidades": ["I St In", "I St Ss", "I Ps Ss", "I In St", "E St Ss", "E St In", "E Ps In"],
@@ -154,7 +149,7 @@ function processarEspecialidades() {
       },
       "HEMATOLOGIA E HEMOTERAPIA": {
         "Personalidades": ["I Ss St", "I Ss Ps", "I Ps Ss", "I Ps In"],
-        "Interesses Profissionais": ["Cálculo/Finanças", "Comportamental/Educacional", "Comunicação/Persuasão"]
+        "Interesses Profissionais": ["Cálculo/Finanças", "Comportamental/Educacional", "Comunicação/Persuasão", "Físico/Matemático"]
       },
       "HOMEOPATIA": {
         "Personalidades": ["I St In", "I St Ss", "I In St"],
@@ -202,7 +197,7 @@ function processarEspecialidades() {
       },
       "MEDICINA NUCLEAR": {
         "Personalidades": ["I Ss Ps", "I Ps In", "E Ps In", "E In Ps"],
-        "Interesses Profissionais": ["Físico/Químico", "Comunicação/Persuasão", "Organizacional/Administrativo"]
+        "Interesses Profissionais": ["Físico/Químico", "Comunicação/Persuasão", "Organizacional/Administrativo", "Físico/Matemático"]
       },
       "MEDICINA PREVENTIVA E SOCIAL": {
         "Personalidades": ["I St In", "I St Ss", "I In St", "E St In", "E In St", "E Ps Ss"],
@@ -210,7 +205,7 @@ function processarEspecialidades() {
       },
       "NEFROLOGIA": {
         "Personalidades": ["I Ss Ps", "I Ps Ss", "I Ps In", "E Ps In", "E Ps Ss"],
-        "Interesses Profissionais": ["Físico/Químico", "Comunicação/Persuasão", "Comportamental/Educacional"]
+        "Interesses Profissionais": ["Físico/Químico", "Comunicação/Persuasão", "Comportamental/Educacional", "Físico/Matemático"]
       },
       "NEUROCIRURGIA": {
         "Personalidades": ["E Ps In", "E In Ps", "E Ps Ss"],
@@ -242,7 +237,7 @@ function processarEspecialidades() {
       },
       "PATOLOGIA/ PATOLOGIA CLÍNICA E MEDICINA LABORATORIAL": {
         "Personalidades": ["I Ss Ps", "I Ps Ss", "I In Ps", "I Ps In"],
-        "Interesses Profissionais": ["Físico/Químico", "Cálculo/Finanças", "Comportamental/Educacional", "Comunicação/Persuasão"]
+        "Interesses Profissionais": ["Físico/Químico", "Cálculo/Finanças", "Comportamental/Educacional", "Comunicação/Persuasão", "Físico/Matemático"]
       },
       "PEDIATRIA": {
         "Personalidades": ["E St Ss", "E Ss St", "E St In", "E In St"],
@@ -262,7 +257,7 @@ function processarEspecialidades() {
       },
       "RADIOTERAPIA": {
         "Personalidades": ["E Ss Ps", "E Ps In", "E In Ps", "E Ps Ss"],
-        "Interesses Profissionais": ["Físico/Químico", "Cálculo/Finanças", "Comunicação/Persuasão", "Organizacional/Administrativo"]
+        "Interesses Profissionais": ["Físico/Químico", "Cálculo/Finanças", "Comunicação/Persuasão", "Organizacional/Administrativo", "Físico/Matemático"]
       },
       "REUMATOLOGIA": {
         "Personalidades": ["I Ss Ps", "I Ps Ss", "I In Ps", "I Ps In"],
@@ -270,7 +265,7 @@ function processarEspecialidades() {
       },
       "UROLOGIA": {
         "Personalidades": ["E Ss Ps", "E Ps In", "E In Ps", "E Ps Ss"],
-        "Interesses Profissionais": ["Físico/Químico", "Manual/Artístico", "Comunicação/Persuasão"]
+        "Interesses Profissionais": ["Físico/Químico", "Manual/Artístico", "Comunicação/Persuasão", "Físico/Matemático"]
       }
   };
   

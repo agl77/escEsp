@@ -101,7 +101,7 @@ try {
 
 </div>
 <section id="resultados-personalidade">
-    <h6>Resultados da personalidade</h6>
+    <h6><br> Resultados da personalidade</h6>
     <table width="1200">
         <tr>
             <th>R1</th>
@@ -114,13 +114,22 @@ try {
             <td id="R3"></td>
         </tr>
     </table>
-
+    <h6>Função personalidade</h6>
     <table>
         <tr>
-            <th>Personalidade:</th>
             <th id="personalidade"></th>
         </tr>
     </table>
+    </table>
+    <h6>Especialidades compatíveis</h6>
+    <table>
+        <tr>
+            <td id="compatíveis"></td>
+        </tr>
+    </table>
+
+
+
 </section>
 
 </body>
@@ -128,7 +137,7 @@ try {
 
 
 <section id="resultados-especialidades">
-    <h6>Resultados das especialidades e escolha de valores</h6>
+    <h6><br>Respostas sobre especialidades e escolha de valores</h6>
     <table width="1200">
         <tr>
             <th>Itens</th>

@@ -129,10 +129,10 @@ function buscarDadosEspecializacao(idCadastro) {
                 document.getElementById('valores-selecionados').innerHTML = JSON.stringify(selectedValuesData);
                 
             } catch (e) {
-                console.error("Erro ao parsear a resposta JSON:", e, xhr.responseText);
+                //console.error("Erro ao parsear a resposta JSON:", e, xhr.responseText);
             }
         } else {
-            console.error(`Erro ao obter dados: ${xhr.statusText}`);
+            //console.error(`Erro ao obter dados: ${xhr.statusText}`);
         }
     };
 
@@ -208,22 +208,15 @@ function buscarCaracteristicasPrevalentes() {
 
     // Filtra e organiza as características válidas em ordem decrescente de percentual
     const caracteristicasValidas = Object.keys(respostas)
-        .filter(key => !ignorar.includes(key))
+        .filter(key => !ignorar.includes(key) && respostas[key].percentual > 50)
         .map(key => ({ caracteristica: key, percentual: respostas[key].percentual }))
         .sort((a, b) => b.percentual - a.percentual);
 
-    // Seleciona as 5 características com os maiores percentuais
-    const caracteristicasPrevalentes = caracteristicasValidas.slice(0, 6).map(item => ({
-        caracteristica: item.caracteristica,
-        percentual: item.percentual
-    }));
+    // Armazena todas as características com percentual maior que 50 no localStorage
+    localStorage.setItem('caracteristicasPrevalentes', JSON.stringify(caracteristicasValidas));
 
-    // Armazena as características prevalentes no localStorage
-    localStorage.setItem('caracteristicasPrevalentes', JSON.stringify(caracteristicasPrevalentes));
-
-    console.log('Características prevalentes salvas no localStorage:', caracteristicasPrevalentes);
+    console.log('Características prevalentes salvas no localStorage:', caracteristicasValidas);
 }
-
 function carregafuncoes() {
     // Atualiza os resultados de personalidade após um pequeno delay
     atualizarResultadosPersonalidade();
