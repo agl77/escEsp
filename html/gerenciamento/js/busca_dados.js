@@ -25,9 +25,11 @@ function carregarInfoCadastro(idcadastro) {
 
 // Carrega do banco de dados as respostas do id do cadastro selecionado
 function buscarDadosDoServidor(idCadastro) {
+    limpacampos();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            
             try {
                 var dadosPerguntas = JSON.parse(this.responseText);
                 localStorage.setItem('dadosPerguntas', JSON.stringify(dadosPerguntas));
@@ -64,6 +66,7 @@ function buscarDadosDoServidor(idCadastro) {
 
 // Função para exibir as respostas na página
 function exibirRespostas(respostas) {
+    
     var tabelaDados = document.getElementById('dadosRecebidos');
     tabelaDados.innerHTML = ''; // Limpa qualquer conteúdo existente
 
@@ -76,6 +79,7 @@ function exibirRespostas(respostas) {
     var cabecalhoCols = ['Característica', 'Pontos', 'n Quest', 'Percent'];
     cabecalhoCols.forEach(function(col) {
         var th = document.createElement('th');
+        
         th.textContent = col;
         cabecalhoRow.appendChild(th);
     });
@@ -222,4 +226,22 @@ function carregafuncoes() {
     atualizarResultadosPersonalidade();
     buscarCaracteristicasPrevalentes();
     processarEspecialidades();
+}
+
+function limpacampos(){
+    localStorage.setItem("personalidade", " ");
+    const compativelElement = document.getElementById("compatíveis");
+         if (compativelElement) {
+    compativelElement.textContent = '';
+    }
+    // mais ou menos se identifica
+    document.getElementById('mais-se-identifica').innerHTML = '';
+    document.getElementById('menos-se-identifica').innerHTML = '';
+    document.getElementById('valores-selecionados').innerHTML = '';
+    //personalidade
+    document.getElementById("R1").textContent = '';
+    document.getElementById("R2").textContent = '' ;
+    document.getElementById("R3").textContent = '' ;
+    document.getElementById("personalidade").textContent = '' ;
+
 }

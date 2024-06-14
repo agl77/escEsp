@@ -28,24 +28,35 @@ $_SESSION['ultima_atividade'] = $tempoAtual;
     <title>Apresentação das respostas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
-    table {
-        border-collapse: collapse;
-        width: 500px;
-    }
+            body {
+            margin-left: 45px; /* Adição de margem esquerda */
+        }
 
-    th, td {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 2px;
-    }
+        table {
+            border-collapse: collapse;
+            width: 500px;
+        }
 
-    th {
-        background-color: #f2f2f2;
-    }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 2px;
+            word-break: break-all; /* Quebra de linhas em células */
+        }
 
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #resultados-personalidade,
+        #resultados-especialidades {
+            margin-top: 20px;
+            margin-bottom: 20px; /* Espaçamento entre seções */
+        }
 </style>
 </head>
 <body>
@@ -72,7 +83,7 @@ try {
     $cadastros = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
     echo "<form method='post' action='' id='formCadastro'>";
-    echo "<label for='cadastro'>Selecione um cadastro:</label>";
+    echo "<label for='cadastro'>Cadastro:</label>";
     echo "<select id='cadastro' name='cadastro' onchange='carregarInfoCadastro(this.value)'>";
     foreach ($cadastros as $cadastro) {
         $value = $cadastro['idcadastro'] . ' - ' . $cadastro['email'];
@@ -109,23 +120,29 @@ try {
             <th>R3</th>
         </tr>
         <tr>
-            <td id="R1"></td>
-            <td id="R2"></td>
-            <td id="R3"></td>
+            <td id="R1"><br></td>
+            <td id="R2"><br></td>
+            <td id="R3"><br></td>
         </tr>
     </table>
-    <h6>Função personalidade</h6>
+    <h6>Personalidade</h6>
     <table>
         <tr>
-            <th id="personalidade"></th>
+            <th id="personalidade"><br></th>
         </tr>
     </table>
     </table>
     <h6>Especialidades compatíveis</h6>
-    <table>
-        <tr>
-            <td id="compatíveis"></td>
-        </tr>
+    <table id="tabela-especialidades">
+        <thead>
+            <tr>
+                <th>Especialidade</th>
+                <th>Pontuação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- As linhas da tabela serão inseridas aqui pelo JavaScript -->
+        </tbody>
     </table>
 
 

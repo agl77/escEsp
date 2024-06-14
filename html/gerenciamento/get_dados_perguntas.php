@@ -27,7 +27,8 @@ if (isset($_GET['idcadastro'])) {
             header('Content-Type: application/json');
             echo json_encode($infoCadastro);
         } else {
-            echo "Nenhum dado encontrado para o ID de cadastro fornecido.";
+            $respostavasia = ('pergunta001');
+            echo json_encode($respostavasia);
         }
 
     } catch (PDOException $e) {

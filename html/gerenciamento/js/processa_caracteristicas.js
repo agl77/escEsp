@@ -41,12 +41,27 @@ function processarEspecialidades() {
     // Ordenar as especialidades com base na pontuação e selecionar as 3 principais
     especialidadesPontuadas.sort((a, b) => b.totalPontuacaoInteresses - a.totalPontuacaoInteresses);
     console.log(especialidadesPontuadas);
-    const especialidadesProvaveis = especialidadesPontuadas.slice(0, 5).map(item => item.especialidade);
+    const especialidadesProvaveis = especialidadesPontuadas.slice(0, 15).map(item => item.especialidade);
+    // Acessar a tabela de especialidades compatíveis
+    const tabelaEspecialidades = document.querySelector('#tabela-especialidades tbody');
 
+    // Limpar a tabela antes de adicionar novas linhas
+    tabelaEspecialidades.innerHTML = '';
+
+    // Percorrer as especialidades pontuadas e criar linhas na tabela
+    for (const especialidade of especialidadesPontuadas) {
+    const linha = tabelaEspecialidades.insertRow();
+    const celulaEspecialidade = linha.insertCell();
+    const celulaPontuacao = linha.insertCell();
+
+    // Preencher as células com os dados da especialidade
+    celulaEspecialidade.textContent = especialidade.especialidade;
+    celulaPontuacao.textContent = especialidade.totalPontuacaoInteresses;
+    }
 
     localStorage.setItem('especialidadescompativeis', JSON.stringify(especialidadesProvaveis));
     //console.log("Especialidades Compatíveis:", especialidadesProvaveis);
-    document.getElementById("compatíveis").textContent = especialidadesProvaveis;
+    //document.getElementById("compatíveis").textContent = especialidadesProvaveis;
 }
 
   // Objeto contendo dados de cada especialidade (personalidades e interesses profissionais)
