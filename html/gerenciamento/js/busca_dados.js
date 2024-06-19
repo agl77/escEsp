@@ -102,6 +102,7 @@ function exibirRespostas(respostas) {
 
     // Adiciona a tabela ao elemento HTML
     tabelaDados.appendChild(tabela);
+    buscarCaracteristicasPrevalentes();
     carregafuncoes();
 }
 
@@ -201,7 +202,6 @@ function atualizarResultadosPersonalidade() {
 function buscarCaracteristicasPrevalentes() {
     // Pega as respostas do localStorage e parseia para um objeto
     const respostas = JSON.parse(localStorage.getItem('respostas'));
-
     if (!respostas) {
         console.error('Nenhum dado encontrado no localStorage com a chave "respostas".');
         return;
@@ -211,22 +211,48 @@ function buscarCaracteristicasPrevalentes() {
     const ignorar = ["Extroversão", "Introversão", "Intuição", "Sensação", "Pensamento", "Sentimento", "Saúde"];
 
     // Filtra e organiza as características válidas em ordem decrescente de percentual
-    const caracteristicasValidas = Object.keys(respostas)
+    let caracteristicasValidas = Object.keys(respostas)
         .filter(key => !ignorar.includes(key) && respostas[key].percentual > 50)
         .map(key => ({ caracteristica: key, percentual: respostas[key].percentual }))
         .sort((a, b) => b.percentual - a.percentual);
 
-    // Armazena todas as características com percentual maior que 50 no localStorage
+    // Se não houver características válidas acima de 50%, busca características acima de 35%
+    if (caracteristicasValidas.length === 0) {
+        caracteristicasValidas = Object.keys(respostas)
+            .filter(key => !ignorar.includes(key) && respostas[key].percentual > 30)
+            .map(key => ({ caracteristica: key, percentual: respostas[key].percentual }))
+            .sort((a, b) => b.percentual - a.percentual);
+    }
+
+    // Armazena todas as características com percentual maior que 50 (ou 35) no localStorage
     localStorage.setItem('caracteristicasPrevalentes', JSON.stringify(caracteristicasValidas));
 
     console.log('Características prevalentes salvas no localStorage:', caracteristicasValidas);
 }
+
 function carregafuncoes() {
     // Atualiza os resultados de personalidade após um pequeno delay
     atualizarResultadosPersonalidade();
-    buscarCaracteristicasPrevalentes();
     processarEspecialidades();
+    perguntassemresposta();
 }
+function perguntassemresposta() {
+    // Recupera os dados do localStorage
+    const dadosPerguntas = JSON.parse(localStorage.getItem('dadosPerguntas'));
+
+    // Verifica se os dados existem
+    if (!dadosPerguntas) {
+        console.error('Nenhum dado encontrado no localStorage com a chave "dadosPerguntas".');
+        return;
+    }
+
+    // Conta o número de valores null
+    const nullCount = Object.values(dadosPerguntas).filter(value => value === null).length;
+
+    // Exibe o resultado no HTML
+    const nullCountElement = document.getElementById('null-count');
+    nullCountElement.textContent = `Número de respostas nulas: ${nullCount}`;
+};
 
 function limpacampos(){
     localStorage.setItem("personalidade", " ");

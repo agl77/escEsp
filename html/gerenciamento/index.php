@@ -175,6 +175,7 @@ try {
       
     </table>
 </section>
+<div id="null-count"></div>
 
 </body>
 </html>
