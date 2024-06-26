@@ -34,7 +34,9 @@ function processarEspecialidades() {
         const personalidadeMatch = verificarPersonalidadeEspecialidade(personalidadeFuncao, especialidadePersonalidades);       
         const totalPontuacaoInteresses = verificarInteressesProfissionais(interessesProfissionais, caracteristicasPrevalentes);
         if (personalidadeMatch) {
+          if (totalPontuacaoInteresses > 0) {
             especialidadesPontuadas.push({ especialidade, totalPontuacaoInteresses });
+        }
         }
     }
 

@@ -34,7 +34,7 @@ $_SESSION['ultima_atividade'] = $tempoAtual;
 
         table {
             border-collapse: collapse;
-            width: 500px;
+            width: 600px;
         }
 
         th, td {
@@ -113,7 +113,7 @@ try {
 </div>
 <section id="resultados-personalidade">
     <h6><br> Resultados da personalidade</h6>
-    <table width="1200">
+    <table width="600">
         <tr>
             <th>R1</th>
             <th>R2</th>
@@ -155,7 +155,7 @@ try {
 
 <section id="resultados-especialidades">
     <h6><br>Respostas sobre especialidades e escolha de valores</h6>
-    <table width="1200">
+    <table width="600">
         <tr>
             <th>Itens</th>
             <th>Escolhas</th>
